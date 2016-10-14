@@ -2,6 +2,8 @@
 
 * [定義變數－Variables](#定義變數variables)
 
+* [迴圈－Foreach](#迴圈foreach)
+
 * [日期－Date](#日期date)
 
 * [切割字串－Split（Explode）](#切割字串splitexplode)
@@ -39,6 +41,45 @@ c := "bar"
 
 // 覆蓋：先前已經定義過 a 了，所以可以像這樣直接覆蓋其值
 a = "fooooooo"
+```
+
+&nbsp;
+
+# 迴圈－Foreach
+
+這個迴圈和 `for()` 不同的是 `foreach()` 能夠直接給你值和鍵名，在 PHP 中用起來十分簡單：
+
+```php
+$data = ['a', 'b', 'c'];
+
+foreach($data as $index => $value)
+    echo $index . $value . '|' ; // 輸出：0a|1b|2c|
+
+foreach($data as $index => $value)
+    echo $index . '|' ; // 輸出：0|1|2|
+    
+foreach($data as $value)
+    echo $value . '|' ; // 輸出：a|b|c|
+```
+
+Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法，
+
+在這裡你可以利用 Golang 中的 `range` 達成和 PHP 一樣的 `foreach` 方式：
+
+```go
+data := []string{"a", "b", "c"}
+
+for index, value := range data {
+    fmt.Printf("%d%s|", index, value)  // 輸出：0a|1b|2c|
+}
+
+for index := range data {
+    fmt.Printf("%d|", index)  // 輸出：0|1|2|
+}
+
+for _, value := range data {
+    fmt.Printf("%s|", value)  // 輸出：a|b|c|
+}
 ```
 
 &nbsp;
