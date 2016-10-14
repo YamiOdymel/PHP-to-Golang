@@ -6,6 +6,8 @@
 
 * [函式－Function](#函式function)
 
+* [匿名函式－Anonymous Function]()
+
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
 
     * [陣列－Array](#陣列array)
@@ -30,6 +32,8 @@
 
 * [指針－Pointer](#指針pointer)
 
+* [錯誤處理－Error Exception]()
+
 * [套件／匯入／匯出－Package / Import / Export]()
 
     * [套件－Package](#套件package)
@@ -39,6 +43,14 @@
     * [匯出－Export](#匯出export)
 
 * [類別－Class](#類別class)
+
+   * [一般－Normal]()
+   
+   * [建構子－Constructor]()
+   
+   * [繼承－Embedding]()
+   
+   * [多形－]()
 
 
 &nbsp;
@@ -70,6 +82,8 @@ Golang 是我最終的選擇，主要在於我花了一天的時間來研究的�
 [Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
 
 [Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
+
+[Golang concepts from an OOP point of view](https://github.com/luciotato/golang-notes/blob/master/OOP.md)
 
 &nbsp;
 
@@ -669,7 +683,7 @@ $b = new Foobar();
 $b->test(); // 輸出：hello, world!
 ```
 
-雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**。
+雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**，在 Golang 中還有一點，那就是他們**沒有** `public`, `private`, `protected` 的種類。
 
 ```go
 // 先定義一個 Foobar 建構體，然後有個叫做 a 的字串成員
@@ -685,5 +699,7 @@ func (f *Foobar) test () {
 b := &Foobar{a: "hello, world!"}
 b.test() // 輸出：hello, world!
 ```
+
+### 建構子－Constructor
 
 ### 嵌入－Embed
