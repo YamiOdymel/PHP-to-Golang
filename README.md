@@ -66,7 +66,7 @@ a = "fooooooo"
 
 &nbsp;
 
-# 迴圈－Foreach
+## 迴圈－Foreach
 
 這個迴圈和 `for()` 不同的是 `foreach()` 能夠直接給你值和鍵名，在 PHP 中用起來十分簡單：
 
@@ -244,3 +244,13 @@ func main() {
     fmt.Printf("%d", A) // 輸出：0
 }
 ```
+
+--
+
+**額外參考**
+
+[《Effective Go》中英双语版](https://bingohuang.gitbooks.io/effective-go-zh-en/content)
+
+[Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
+
+[Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
