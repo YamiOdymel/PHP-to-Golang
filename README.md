@@ -6,7 +6,7 @@
 
 * [函式－Function](#函式function)
 
-* [匿名函式－Anonymous Function]()
+* [匿名函式－Anonymous Function](匿名函式anonymous-function)
 
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
 
@@ -118,7 +118,7 @@ a = "fooooooo"
 
 ## 函式－Function
 
-這很簡單，而且兩個語言的用法相差甚少。
+這很簡單，而且兩個語言的用法相差甚少，下面這是 PHP：
 
 ```php
 function test()
@@ -139,7 +139,30 @@ func test() string {
 fmt.Println(test()) // 輸出：Hello, world!
 ```
 
+&nbsp;
+
 ## 匿名函式－Anonymous Function
+
+兩個語言的撰寫方式不盡相同，這是 PHP 的匿名函式：
+
+```php
+$a = function()
+{
+    echo "Hello, world!";
+};
+
+$a(); // 輸出：Hello, world!
+```
+
+然後這是 Golang：
+
+```go
+a := func() {
+    fmt.Println("Hello, world!")
+}
+	
+a() // 輸出：Hello, world!
+```
 
 &nbsp;
 
@@ -475,6 +498,8 @@ func main() {
 }
 ```
 
+&nbsp;
+
 ## 錯誤處理－Error Exception
 
 &nbsp;
@@ -664,7 +689,7 @@ func main() {
 
 在 Golang 中沒有類別，給你一張衛生紙，你要學會不哭；正所謂「上有政策，下有對策」，Golang 中有所謂的「**建構體（Struct）**」和「**接口（Interface）**」，這就能夠滿足幾乎所有的需求了，這也是為什麼我認為 Golang 很簡潔卻又很強大的原因。
 
-## 一般－Normal
+### 一般－Normal
 
 讓我們先用 PHP 建立一個類別，然後看看 Golang 怎麼解決這個問題。
 
