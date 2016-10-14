@@ -4,6 +4,8 @@
 
 * [定義變數－Variables](#定義變數variables)
 
+* [函式－Function](#函式function)
+
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
 
     * [陣列－Array](#陣列array)
@@ -36,7 +38,7 @@
     
     * [匯出－Export](#匯出export)
 
-* [類別－Class]()
+* [類別－Class](#類別class)
 
 
 &nbsp;
@@ -58,6 +60,16 @@ Node.js 的效能可以說是快上 PHP [3.5倍至6倍左右](http://benchmarksg
 ### Golang
 
 Golang 是我最終的選擇，主要在於我花了一天的時間來研究的時候意外地發現 Golang 夭壽簡潔（[關鍵字只有25個](https://astaxie.gitbooks.io/build-web-application-with-golang/content/zh/02.8.html)），相較之下 Rust 太過於「強大」令我怯步；而且 Golang 帶有許多工具，例如 `go fmt` 會自動幫你整理程式碼、`go doc` 會自動幫你生產文件、`go test` 可以自動單元測試並生產覆蓋率報表、也有 `go get` 套件管理工具（雖然沒有版本功能），不過都很實用，而且也不需要加上分號（`;`），真要說不好的地方⋯⋯大概就是強迫你花括號不能換行放吧（沒錯，我就是花括號會換行放的人）。
+
+&nbsp;
+
+## 還請先閱讀⋯
+
+[《Effective Go》中英双语版](https://bingohuang.gitbooks.io/effective-go-zh-en/content)
+
+[Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
+
+[Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
 
 &nbsp;
 
@@ -87,6 +99,33 @@ c := "bar"
 // 覆蓋：先前已經定義過 a 了，所以可以像這樣直接覆蓋其值
 a = "fooooooo"
 ```
+
+&nbsp;
+
+## 函式－Function
+
+這很簡單，而且兩個語言的用法相差甚少。
+
+```php
+function test()
+{
+    return "Hello, world!";
+}
+
+echo test(); // 輸出：Hello, world!
+```
+
+忘了告訴你，只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
+
+```go
+func test() string {
+    return "Hello, world!"
+}
+
+fmt.Println(test()) // 輸出：Hello, world!
+```
+
+## 匿名函式－Anonymous Function
 
 &nbsp;
 
@@ -379,6 +418,50 @@ if !exists {
     fmt.Printf("你要找的資料不存在。")
 }
 ```
+&nbsp;
+
+## 指針－Pointer
+
+指針（也做參照）是一個像是「變數別名」的方法，這種方法讓你不用整天覆蓋舊的變數，
+
+讓我們假設 `A = 1; B = A;` 這個時候 `B` 會複製一份 `A` 且**兩者不相干**，
+
+倘若你希望修改 `B` 的時候實際上也會修改到 `A` 的值，就**會需要指針**。
+
+在 PHP 的實際範例是這樣：
+
+```php
+function zero(&$number) // & 即是指針
+{
+    $number = 0;
+}
+
+$A = 5;
+zero($A);
+
+echo $A; // 輸出：0
+```
+
+在 Golang 你需要用上 `*` 還有 `&` 符號，你可以稍微這樣區分這兩者：
+
+> `&`：我給你
+
+> `*`：還給你
+
+```go
+func zero(number *int) {
+    *number = 0
+}
+
+func main() {
+    A := 5;
+    zero(&A)
+
+    fmt.Printf("%d", A) // 輸出：0
+}
+```
+
+## 錯誤處理－Error Exception
 
 &nbsp;
 
@@ -565,57 +648,42 @@ func main() {
 
 ## 類別－Class
 
+在 Golang 中沒有類別，給你一張衛生紙，你要學會不哭；正所謂「上有政策，下有對策」，Golang 中有所謂的「**建構體（Struct）**」和「**接口（Interface）**」，這就能夠滿足幾乎所有的需求了，這也是為什麼我認為 Golang 很簡潔卻又很強大的原因。
 
+## 一般－Normal
 
-&nbsp;
-
-## 指針－Pointer
-
-指針（也做參照）是一個像是「變數別名」的方法，這種方法讓你不用整天覆蓋舊的變數，
-
-讓我們假設 `A = 1; B = A;` 這個時候 `B` 會複製一份 `A` 且**兩者不相干**，
-
-倘若你希望修改 `B` 的時候實際上也會修改到 `A` 的值，就**會需要指針**。
-
-在 PHP 的實際範例是這樣：
+讓我們先用 PHP 建立一個類別，然後看看 Golang 怎麼解決這個問題。
 
 ```php
-function zero(&$number) // & 即是指針
+class Foobar
 {
-    $number = 0;
+    public $a = "hello, world";
+    
+    public function test()
+    {
+        echo $this->a;
+    }
 }
 
-$A = 5;
-zero($A);
-
-echo $A; // 輸出：0
+$b = new Foobar();
+$b->test(); // 輸出：hello, world!
 ```
 
-在 Golang 你需要用上 `*` 還有 `&` 符號，你可以稍微這樣區分這兩者：
-
-> `&`：我給你
-
-> `*`：還給你
+雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**。
 
 ```go
-func zero(number *int) {
-    *number = 0
+// 先定義一個 Foobar 建構體，然後有個叫做 a 的字串成員
+type Foobar struct {
+    a string
 }
 
-func main() {
-    A := 5;
-    zero(&A)
-
-    fmt.Printf("%d", A) // 輸出：0
+// 定義一個屬於 Foobar 的 test 方法
+func (f *Foobar) test () {
+    fmt.Println(f.a)
 }
+
+b := &Foobar{a: "hello, world!"}
+b.test() // 輸出：hello, world!
 ```
 
---
-
-**額外參考**
-
-[《Effective Go》中英双语版](https://bingohuang.gitbooks.io/effective-go-zh-en/content)
-
-[Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
-
-[Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
+### 嵌入－Embed
