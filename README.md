@@ -12,6 +12,8 @@
 
 * [指針－Pointer](#指針pointer)
 
+&nbsp;
+
 ## 定義變數－Variables
 
 你能夠在 PHP 裡面想建立一個變數的時候就直接建立，夭壽讚，是嗎？
@@ -39,6 +41,8 @@ c := "bar"
 a = "fooooooo"
 ```
 
+&nbsp;
+
 ## 日期－Date
 
 在 PHP 中我們可以透過 `date()` 像這樣取得目前的日期：
@@ -53,6 +57,8 @@ echo data("Y-m-d H:i:s"); // 輸出：2016-07-13 12:59:59
 fmt.Println(time.Now().Format("2006-2-1 03:04:00"))          // 輸出：2016-07-13 12:59:59
 fmt.Println(time.Now().Format("Mon, Jan 2, 2006 at 3:04pm")) // 輸出： Mon, Jul 13, 2016 at 12:59pm
 ```
+
+&nbsp;
 
 ## 切割字串－Split（Explode）
 
@@ -73,6 +79,8 @@ array := strings.Split(data, ", ")
 ```
 
 對了，**記得引用 `strings` 套件**。
+
+&nbsp;
 
 ## 關聯陣列－Associative Array
 
@@ -108,6 +116,8 @@ func main() {
 
 好吧⋯⋯就目前來說還沒有那麼地糟。
 
+&nbsp;
+
 ## 是否存在－Isset
 
 你很常會在 PHP 裡面用 `isset()` 檢查一個索引是否存在，不是嗎？
@@ -130,6 +140,7 @@ if !exists {
 }
 ```
 
+&nbsp;
 
 ## 指針－Pointer
 
