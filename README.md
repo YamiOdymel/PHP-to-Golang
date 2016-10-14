@@ -4,7 +4,9 @@
 
 * [定義變數－Variables](#定義變數variables)
 
-* [多資料儲存型態－Array](#多資料儲存型態array)
+* [定義變數－Variables](#定義變數variables)
+
+* [多資料儲存型態－Stores](#多資料儲存型態stores)
 
 * [迴圈－Foreach](#迴圈foreach)
 
@@ -85,6 +87,8 @@ $array2 = ['username' => 'YamiOdymel',
 
 ### 陣列－Array
 
+> 一個存放固定長度的陣列。
+
 先撇開 PHP 的「萬能陣列」不管，Golang 中的陣列既**單純卻又十分腦殘**，在定義一個陣列的時候，你必須給他一個**長度**還有**其內容存放的資料型態**，你的陣列內容**不一定要填滿其長度**，但是你的**陣列內容不能超過你當初定義的長度**。
 
 如果你在 PHP 中這麼寫：
@@ -107,6 +111,8 @@ fmt.Println(a[0]) // 輸出：foo
 ```
 
 ### 切片－Slice
+
+> 可供「裁切」而且供自由擴展的陣列。
 
 切片⋯⋯這聽起來也許很奇怪，但是你確實可以「切」他，讓我們先談談「切片」比起「陣列」要好在哪裡：「**你不用定義其最大長度**，而且你可以**直接賦予值**」，沒了。
 
@@ -150,20 +156,85 @@ echo array_slice($p, 0, 1); // 輸出：[1]
 
 ### 映照－Map
 
+> 有鍵名和鍵值的陣列。
+
 你可以把「映照」看成是一個有鍵名和鍵值的陣列，但是記住：「**你需要事先定義其鍵名、鍵值的資料型態**」，這仍限制你**沒辦法**在映照中存放多種不同型態的資料。
 
+讓我們先來個 PHP 範例：
+
+```php
+$data["username"] = "YamiOdymel";
+$data["password"] = "2016 Spring";
+
+echo $data["username"]; // 輸出：YamiOdymel
+```
+
+在 Golang 裡可就沒這麼簡單了，你需要先用 `make()` 宣告 `map`。
+
 ```go
-a := make(map[string]string)
+data := make(map[string]string)
 
-a["username"] = "YamiOdymel"
-a["password"] = "2016 Spring"
+data["username"] = "YamiOdymel"
+data["password"] = "2016 Spring"
 
-fmt.Println(a["username"]) // 輸出：YamiOdymel
+fmt.Println(data["username"]) // 輸出：YamiOdymel
 ```
 
 ### 接口－Interface
 
+> 終於；一個可存放多種資料型態的陣列，但難以捉模（幹）。
+
 也許你不喜歡「接口」這個詞，但用「介面」我怕會誤導大眾，所以，是的，接下來我會繼續稱其為「接口」。
+
+還記得你可以在 PHP 的關聯陣列裡面存放任何型態的資料嗎，像下面這樣？
+
+```php
+$mixedData  = ["foobar", 123456];
+$mixedData2 = ['username' => 'YamiOdymel', 
+               'time'     => 123456];
+```
+
+現在你有福了！正因為 Golang 中的 `interface{}` **可以接受任何內容**，所以你可以把它拿來**存放任何型態的資料**。
+
+```go
+mixedData := []interface{"foobar", 123456}
+
+mixedData2 := make(map[string]interface{})
+mixedData2["username"] = "YamiOdymel"
+mixedData2["time"]     = 123456
+```
+
+&nbsp;
+
+## 不定值－Mixed Type
+
+有時候你也許會有個不定值的變數，在 PHP 裏你可以直接將一個變數定義成字串、數值、空值、就像你那變心的女友一樣隨時都在變。
+
+```php
+$mixed = 123;
+echo $mixed; // 輸出：123
+
+$mixed = "Moon, Dalan!";
+echo $mixed; // 輸出：Moon, Dalan!
+
+$mixed = ["A", "B", "C"];
+echo $mixed; // 輸出：["A", "B", "C"]
+```
+
+在 Golang 中你必須給予變數一個指定的資料型別，不過還記得剛才提到的：「Golang 中有個 `interface{}` 能夠**存放任何事物**」嗎（*雖然也不是真的任何事物啦⋯⋯*）？
+
+```go
+var mixed interface{}
+
+mixed = 123
+fmt.Println(mixed) // 輸出：123
+
+mixed = "Moon, Dalan!"
+fmt.Println(mixed) // 輸出：Moon, Dalan!
+
+mixed = []string{"A", "B", "C"}
+fmt.Println(mixed) // 輸出：["A", "B", "C"]
+```
 
 &nbsp;
 
@@ -256,28 +327,16 @@ $data = ['username' => 'YamiOdymel',
 echo $data["username"]; // 輸出：YamiOdymel
 ```
 
-真是太棒了，那麼 Golang 呢？完全不是這麼一回事，還記得 Golang 是強型別語言嗎，
-
-在 Golang 裡面**陣列僅有索引**，並沒辦法將其賦予鍵名，取而代之的是**建構體（Struct）**，
-
-你需要先替你的「關聯陣列」建立一個建構體。
+真是太棒了，那麼 Golang 呢？用 `map` 是差不多啦。如果有必要的話，你可以稍微複習一下先前提到的「多資料儲存型態－Stores」。
 
 ```go
-type Data struct {
-    username string
-    password string
-}
+data := make(map[string]string)
 
-func main() { 
-    data := Data {
-        username: "YamiOdymel",
-        password: "2016 Spring"}
-    
-    fmt.Println(data.username) // 輸出：YamiOdymel
-}
+data["username"] = "YamiOdymel"
+data["password"] = "2016 Spring"
+
+fmt.Println(data["password"])
 ```
-
-好吧⋯⋯就目前來說還沒有那麼地糟。
 
 &nbsp;
 
