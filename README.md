@@ -1,8 +1,10 @@
 # 從 PHP 到 Golang 的筆記
 
+* 
+
 ## 定義變數－Variables
 
-在 PHP 裡面你想建立一個變數就直接建立，夭壽讚，是嗎？
+你能夠在 PHP 裡面想建立一個變數的時候就直接建立，夭壽讚，是嗎？
 
 ```php
 $a = "foo";
@@ -26,6 +28,41 @@ c := "bar"
 // 覆蓋：先前已經定義過 a 了，所以可以像這樣直接覆蓋其值
 a = "fooooooo"
 ```
+
+## 日期－Date
+
+在 PHP 中我們可以透過 `date()` 像這樣取得目前的日期：
+
+```
+echo data("Y-m-d H:i:s"); // 輸出：2016-07-13 12:59:59
+```
+
+在 Golang 就稍微有趣點了，因為 Golang 會**自動偵測格式**，像這樣：
+
+```go
+fmt.Println(time.Now().Format("2006-2-1 03:04:00"))          // 輸出：2016-07-13 12:59:59
+fmt.Println(time.Now().Format("Mon, Jan 2, 2006 at 3:04pm")) // 輸出： Mon, Jul 13, 2016 at 12:59pm
+```
+
+## 切割字串－Split（Explode）
+
+俗話說：「爆炸就是藝術」，我們可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），
+
+回歸正傳，如果你想在 PHP 裡面將字串切割成陣列，你可以這麼做：
+
+```php
+$data  = "a, b, c, d";
+$array = explode(", ", $data);
+```
+
+簡單的就讓一個字串給「爆炸」了，那麼 Golang 呢？
+
+```go
+data  := "a, b, c, d"
+array := strings.Split(data, ", ")
+```
+
+對了，**記得引用 `strings` 套件**。
 
 ## 關聯陣列－Associative Array
 
@@ -110,7 +147,7 @@ echo $A; // 輸出：0
 
 > `&`：我給你
 
-> `*`：還給我
+> `*`：還給你
 
 ```go
 func zero(number *int) {
