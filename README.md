@@ -1,8 +1,10 @@
-![](logo.png)
+![](images/logo.png)
 
 # 從 PHP 到 Golang 的筆記
 
 * [定義變數－Variables](#定義變數variables)
+
+* [多資料儲存型態－Array](#多資料儲存型態array)
 
 * [迴圈－Foreach](#迴圈foreach)
 
@@ -16,6 +18,7 @@
 
 * [指針－Pointer](#指針pointer)
 
+&nbsp;
 
 ## 我為什麼從 PHP 轉到 Golang？
 
@@ -63,6 +66,104 @@ c := "bar"
 // 覆蓋：先前已經定義過 a 了，所以可以像這樣直接覆蓋其值
 a = "fooooooo"
 ```
+
+&nbsp;
+
+## 多資料儲存型態－Stores
+
+主要是 PHP 的陣列能做太多事情了，所以在 PHP 裡面要儲存什麼用陣列就好了。
+
+```php
+$array  = [1, 2, 3, 4, 5];
+$array2 = ['username' => 'YamiOdymel', 
+           'password' => '2016 Spring'];
+```
+
+在 Golang 裡⋯⋯沒有這麼萬能的東西，首先要先了解 Golang 中有這些型態：`array`, `slice`, `map`, `interface`，
+
+你他媽的我到底看了三洨，首先你要知道 Golang 是個強型別語言，意思是你的陣列中**只能有一種型態**，什麼意思？當你決定**這個陣列是用來擺放字串資料的時候，你就只能在裡面放字串**，沒有數值，沒有布林值，就像你沒有女朋友一樣。
+
+### 陣列－Array
+
+先撇開 PHP 的「萬能陣列」不管，Golang 中的陣列既**單純卻又十分腦殘**，在定義一個陣列的時候，你必須給他一個**長度**還有**其內容存放的資料型態**，你的陣列內容**不一定要填滿其長度**，但是你的**陣列內容不能超過你當初定義的長度**。
+
+如果你在 PHP 中這麼寫：
+
+```php
+$a = ["foo", "bar"];
+
+echo $a[0]; // 輸出：foo
+```
+
+那麼這就是你在 Golang 如何將其實作：
+
+```go
+var a [2]string
+
+a[0] = "foo"
+a[1] = "bar"
+
+fmt.Println(a[0]) // 輸出：foo
+```
+
+### 切片－Slice
+
+切片⋯⋯這聽起來也許很奇怪，但是你確實可以「切」他，讓我們先談談「切片」比起「陣列」要好在哪裡：「**你不用定義其最大長度**，而且你可以**直接賦予值**」，沒了。
+
+所以你在 PHP 中這麼寫（*靠腰 啊不是跟剛才一樣*）：
+
+```php
+$a = ["foo", "bar"];
+
+echo $a[0]; // 輸出：foo
+```
+
+你會在 Golang 中這樣撰寫：
+
+```go
+a := []string{"foo", "bar"}
+
+fmt.Println(a[0]) // 輸出：foo
+```
+
+我們剛才有提到你可以「切」他，記得嗎？這有點像是 PHP 中的 `array_slice()`，但是 Golang 直接讓 Slice「*內建*」了這個用法，其用法是：`slice[開始:結束]`。
+
+```go
+p := []int{1, 2, 3, 4, 5, 6}
+
+fmt.Println(p[0:1]) // 輸出：[1]
+fmt.Println(p[1:1]) // 輸出：[]  （！注意這跟 PHP 不一樣！）
+fmt.Println(p[1:])  // 輸出：[2, 3, 4, 5, 6]
+fmt.Println(p[:1])  // 輸出：[1]
+```
+
+在 PHP 中倒是沒有那麼方便，在下列 PHP 範例中你需要不斷地使用 `array_slice()`。
+
+```php
+$p = [1, 2, 3, 4, 5, 6];
+
+echo array_slice($p, 0, 1); // 輸出：[1]
+echo array_slice($p, 1, 1); // 輸出：[2]
+echo array_slice($p, 1);    // 輸出：[2, 3, 4, 5, 6]
+echo array_slice($p, 0, 1); // 輸出：[1]
+```
+
+### 映照－Map
+
+你可以把「映照」看成是一個有鍵名和鍵值的陣列，但是記住：「**你需要事先定義其鍵名、鍵值的資料型態**」，這仍限制你**沒辦法**在映照中存放多種不同型態的資料。
+
+```go
+a := make(map[string]string)
+
+a["username"] = "YamiOdymel"
+a["password"] = "2016 Spring"
+
+fmt.Println(a["username"]) // 輸出：YamiOdymel
+```
+
+### 接口－Interface
+
+也許你不喜歡「接口」這個詞，但用「介面」我怕會誤導大眾，所以，是的，接下來我會繼續稱其為「接口」。
 
 &nbsp;
 
