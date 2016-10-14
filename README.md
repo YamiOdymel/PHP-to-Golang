@@ -4,9 +4,9 @@
 
 * [定義變數－Variables](#定義變數variables)
 
-* [定義變數－Variables](#定義變數variables)
-
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
+
+* [不定值－Mixed Type](#不定值mixed-type)
 
 * [迴圈－Foreach](#迴圈foreach)
 
@@ -330,10 +330,9 @@ echo $data["username"]; // 輸出：YamiOdymel
 真是太棒了，那麼 Golang 呢？用 `map` 是差不多啦。如果有必要的話，你可以稍微複習一下先前提到的「多資料儲存型態－Stores」。
 
 ```go
-data := make(map[string]string)
-
-data["username"] = "YamiOdymel"
-data["password"] = "2016 Spring"
+data := map[string]string{
+           "username": "YamiOdymel", 
+           "password": "2016 Spring"}
 
 fmt.Println(data["password"])
 ```
