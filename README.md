@@ -1,6 +1,16 @@
 # 從 PHP 到 Golang 的筆記
 
-* 
+* [定義變數－Variables](#定義變數variables)
+
+* [日期－Date](#日期date)
+
+* [切割字串－Split（Explode）](#切割字串splitexplode)
+
+* [關聯陣列－Associative Array](#關聯陣列associative-array)
+
+* [是否存在－Isset](#是否存在isset)
+
+* [指針－Pointer](#指針pointer)
 
 ## 定義變數－Variables
 
