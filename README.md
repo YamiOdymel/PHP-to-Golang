@@ -6,6 +6,14 @@
 
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
 
+    * [陣列－Array](#陣列array)
+    
+    * [切片－Slice](#切片slice)
+    
+    * [映照－Map](#映照map)
+    
+    * [接口－Interface](#接口interface)
+
 * [不定值－Mixed Type](#不定值mixed-type)
 
 * [迴圈－Foreach](#迴圈foreach)
@@ -19,6 +27,10 @@
 * [是否存在－Isset](#是否存在isset)
 
 * [指針－Pointer](#指針pointer)
+
+* []()
+
+* []()
 
 &nbsp;
 
@@ -360,6 +372,114 @@ if !exists {
     fmt.Printf("你要找的資料不存在。")
 }
 ```
+
+&nbsp;
+
+## 套件／引用／匯出／命名區域－Package / Import / Export / Namespace
+
+還記得在 PHP 裡要引用一堆檔案的日子嗎？到處可見的 `require()` 或是 `include()`？
+
+到了 Golang 這些都不見了，取而代之的是「套件（Package）」。現在讓我們來用 PHP 解釋一下。
+
+```php
+// a.php
+<?php
+    $foo = "bar";
+?>
+```
+```php
+// index.php
+<?php
+    include "a.php";
+    
+    echo $foo; // 輸出：bar
+?>
+```
+
+這看起來很正常對吧？但假設你有一堆檔案，這馬上就成了 `Include Hell`，讓我們看看 Golang 怎麼透過「套件」解決這個問題。
+
+```go
+// a.go
+package main
+
+var foo string = "bar"
+```
+
+```go
+// main.go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println(foo) // 輸出：bar
+}
+```
+
+「*蛤？？？殺小？？？*」你可能如此地說道。是的，`main.go` 中除了引用 `fmt` 套件（*為了要輸出結果用的套件*）之外**完全沒有引用到 `a.go`**。
+
+「*蛤？？？殺小？？？？？？*」你彷彿回到了幾秒鐘前的自己。既然沒有引用其他檔案，為什麼 `main.go` 可以輸出 `foo` 呢？
+
+注意到了嗎，**兩者都是屬於 `main` 套件**，因此**他們共享同一個區域**，所以接下來要介紹的是什麼叫做「套件」。
+
+### 套件－Package
+
+套件是每一個 `.go` 檔案都必須聲明的東西，他通常都在 Golang 原始碼中最開端，像下面這樣：
+
+```go
+package main
+```
+
+這意味著目前的檔案是屬於 `main` 套件（你也可以依照你的喜好命名），那麼要如何讓**同個套件之間的函式溝通**呢？先用你熟悉的 PHP 來做解釋：
+
+```php
+// a.php
+<?php
+    function foo()
+    {
+        // ...
+    }
+?>
+```
+```php
+// index.php
+<?php
+    include "a.php";
+    
+    foo();
+?>
+```
+
+接著是 Golang；注意！你**不需要引用任何檔案**，因為下列兩個檔案**同屬一個套件**。
+
+```go
+// a.go
+package main
+
+func foo() {
+    // ...
+}
+```
+
+```go
+// main.go
+package main
+
+func main() {
+    foo()
+}
+```
+
+一個由「套件」所掌握的世界，比起 PHP 的 `include()` 和 `require()` 還要好太多了，對嗎？
+
+
+### 匯出－Export
+
+
+
+&nbsp;
+
+## 類別－Class
 
 &nbsp;
 
