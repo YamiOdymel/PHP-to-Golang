@@ -62,7 +62,7 @@
    
    * [遮蔽－Shadowing]()
    
-   * [多形－]()
+   * [多形－Polymorphism]()
 
 
 &nbsp;
@@ -975,4 +975,72 @@ b := &Bar{Foo: a, msg: "Moon, Dalan!"}
 
 fmt.Println(b.msg)     // 輸出：Moon, Dalan!
 fmt.Println(b.Foo.msg) // 輸出：Hello, world!
+```
+
+### 多形－Polymorphism
+
+雖然都是呼叫同一個函式，但是這個**函式可以針對不同的資料來源做出不同的舉動**，這就是**多形**。你也能夠把這看作是：「**訊息的意義由接收者定義，而不是傳送者**」，目前 PHP 中沒有真正的「多形」，不過你仍可以做出同樣的東西。
+
+```php
+class Foo{ public $msg = "hello";  }
+class Bar{ public $msg = "world!"; }
+
+class Handler
+{
+    public function process($class)
+    {
+        switch(get_class($class))
+        {
+            // 依照不同的資料類型做出不同的舉動
+            case 'Foo':
+                echo '處理 Foo | ' . $class->msg . ', world!';
+                break;
+                
+            case 'Bar':
+                echo '處理 Bar | ' . 'hello, ' . $class->msg;
+                break;
+        }
+    }
+}
+
+$foo = new Foo();
+$bar = new Bar();
+$handler = new Handler();
+
+// 雖然都是同個函式，但是可以處理不同資料
+$handler->process($foo); // 輸出：處理 Foo | hello, world!
+$handler->process($bar); // 輸出：處理 Bar | hello, world!
+```
+
+嗯⋯⋯那麼 Golang 呢？Golang 中有 `interface` 可以幫忙完成這個工作。
+
+```go
+type Foo struct {
+    msg string
+}
+
+type Bar struct {
+    msg string
+}
+
+type Handler interface {
+    process()
+}
+
+// 專門處理 Foo 資料的 process
+func (f Foo) process() {
+    fmt.Printf("處理 Foo | %s, world!", f.msg)
+}
+
+// 專門處理 Bar 資料的 process
+func (b Bar) process() {
+    fmt.Printf("處理 Bar | hello, %s", f.msg)
+}
+
+foo := Foo{msg: "hello"}
+bar := Bar{msg: "world!"}
+
+// 雖然都是同個函式，但是可以處理不同資料
+Handler.process(foo) // 輸出：處理 Foo | hello, world!
+Handler.process(bar) // 輸出：處理 Bar | hello, world!
 ```
