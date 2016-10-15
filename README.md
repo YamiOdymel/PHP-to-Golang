@@ -20,8 +20,18 @@
 
 * [不定值－Mixed Type](#不定值mixed-type)
 
-* [迴圈－Foreach](#迴圈foreach)
+* [跳往－Goto](#跳往goto)
 
+* [迴圈－Loops](#迴圈foreach)
+    
+    * [一般－For]()
+    
+    * [每個－Foreach]()
+    
+    * [當 .. 重複－While]()
+    
+    * [做 .. 重複－Do While]()
+    
 * [日期－Date](#日期date)
 
 * [切割字串－Split（Explode）](#切割字串splitexplode)
@@ -337,9 +347,63 @@ fmt.Println(mixed) // 輸出：["A", "B", "C"]
 
 &nbsp;
 
-## 迴圈－Foreach
+## 跳往－Goto
 
-這個迴圈和 `for()` 不同的是 `foreach()` 能夠直接給你值和鍵名，在 PHP 中用起來十分簡單：
+這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 呢，但是拜託，不要。
+
+```php
+goto a;
+echo "foo";
+ 
+a:
+echo 'bar'; // 輸出：bar
+```
+
+在 Golang 也有相同的東西，令人感到神奇。
+
+```go
+goto a
+fmt.Println("foo")
+
+a:
+fmt.Println("bar") // 輸出：bar
+```
+
+&nbsp;
+
+## 迴圈－Loops
+
+Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。
+
+### 一般－For
+
+普通 For 迴圈寫法在兩個語言中都十分相近，首先這是 PHP：
+
+```php
+for($i = 0; $i < 3; $i++)
+    echo $i; // 輸出：012
+    
+$j = 0;
+for($j; $j < 5; $j++)
+    echo $j; // 輸出：01234
+```
+
+在 Golang 請記得：如果你的 `i` 先前並不存在，那麼**你就需要定義它**，所以下面這個範例你會看見 `i := 0`。
+
+```go
+for i := 0; i < 3; i++ {
+    fmt.Println(i) // 輸出 012
+}
+
+j := 0
+for ; j < 5 ; j++ {
+    fmt.Println(j) // 輸出：01234
+}
+```
+
+### 每個－Foreach
+
+在 PHP 裡，`foreach()` 能夠直接給你值和鍵名，用起來十分簡單：
 
 ```php
 $data = ['a', 'b', 'c'];
@@ -354,9 +418,7 @@ foreach($data as $value)
     echo $value . '|' ; // 輸出：a|b|c|
 ```
 
-Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法，
-
-在這裡你可以利用 Golang 中的 `range` 達成和 PHP 一樣的 `foreach` 方式：
+Golang 裡面雖然僅有 `for()` 但卻可以使用 `range` 達成和 PHP 一樣的 `foreach` 方式：
 
 ```go
 data := []string{"a", "b", "c"}
@@ -372,6 +434,74 @@ for index := range data {
 for _, value := range data {
     fmt.Printf("%s|", value)  // 輸出：a|b|c|
 }
+```
+
+### 當 .. 重複－While
+
+一個 `while(條件)` 迴圈在 PHP 裡面可以不斷地執行區塊中的程式，直到 `條件` 為 `false` 為止。
+
+```php
+$i = 0;
+
+while( $i < 3 )
+    $i++;
+    echo $i; // 輸出：123
+```
+
+在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**。
+
+```go
+i := 0
+
+for i < 3 {
+    i++
+    fmt.Println(i) // 輸出：123
+}
+```
+
+### 做 .. 重複－Do While
+
+PHP 中有 `do .. while()` 迴圈可以先做區塊中的動作。
+
+```php
+$i = 0;
+
+do
+{
+    $i++;
+    echo $i; // 輸出：123
+}
+while($i < 3);
+```
+
+在 Golang 中則沒有相關函式，但是你可以透過一個無止盡的 `for` 迴圈加上條件式來讓他結束迴圈。
+
+```go
+i := 0
+
+for {
+    i++
+    fmt.Println(i) // 輸出：123
+    
+    // 注意這個條件式和 PHP 有所不同
+    if i > 2 {
+        break
+    }
+}
+```
+
+要是你真的希望完全符合像是 PHP 那樣的設計方式，或者你可以在 Golang 中使用很邪惡的 `goto`。
+
+```go
+i := 0
+
+LOOP:
+    i++
+    fmt.Println(i) // 輸出：123
+    
+    if i < 3 {
+        goto LOOP
+    }
 ```
 
 &nbsp;
