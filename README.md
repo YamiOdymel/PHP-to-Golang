@@ -24,17 +24,17 @@
 
 * [跳往－Goto](#跳往goto)
 
-* [迴圈－Loops](#迴圈foreach)
+* [迴圈－Loops](#迴圈loops)
     
-    * [每個－Foreach]()
+    * [每個－Foreach](#每個foreach)
     
-    * [當 .. 重複－While]()
+    * [當 .. 重複－While](#當--重複while)
     
-    * [做 .. 重複－Do While]()
+    * [做 .. 重複－Do While](#做--重複do-while)
     
 * [日期－Date](#日期date)
 
-* [切割字串－Split（Explode）](#切割字串splitexplode)
+* [切割字串－Split](#切割字串split)
 
 * [關聯陣列－Associative Array](#關聯陣列associative-array)
 
@@ -42,7 +42,9 @@
 
 * [指針－Pointer](#指針pointer)
 
-* [錯誤處理－Error Exception]()
+* [錯誤處理－Error Exception](#錯誤處理error-exception)
+
+	* 
 
 * [套件／匯入／匯出－Package / Import / Export]()
 
@@ -401,11 +403,7 @@ fmt.Println("bar") // 輸出：bar
 
 ## 迴圈－Loops
 
-Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。
-
-### 一般－For
-
-普通 For 迴圈寫法在兩個語言中都十分相近，首先這是 PHP：
+Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。普通 `for` 迴圈寫法在兩個語言中都十分相近，首先這是 PHP：
 
 ```php
 for($i = 0; $i < 3; $i++)
@@ -551,9 +549,9 @@ fmt.Println(time.Now().Format("Mon, Jan 2, 2006 at 3:04pm")) // 輸出： Mon, J
 
 &nbsp;
 
-## 切割字串－Split（Explode）
+## 切割字串－Split
 
-俗話說：「爆炸就是藝術」，我們可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），
+俗話說：「爆炸就是藝術」，可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），
 
 回歸正傳，如果你想在 PHP 裡面將字串切割成陣列，你可以這麼做：
 
@@ -664,8 +662,6 @@ func main() {
 
 ## 錯誤處理－Error Exception
 
-### 錯誤回傳－Return Error
-
 有些時候你會回傳一個陣列，這個陣列裡面可能有資料**還有錯誤代號**，而你會用條件式判斷錯誤代號是否非空值，像這樣：
 
 ```php
@@ -703,6 +699,33 @@ if bar, err := foo(0); err != nil {
 ```
 
 ### 拋出和捕捉異常－Try & Catch
+
+也許你在 PHP 中更常用的會是 `try .. catch`，在大型商業邏輯時經常看見如此地用法。
+
+```php
+class LesserException  extends Exception { }
+class GreaterException extends Exception { }
+
+function foo($number)
+{
+    if($number < 10)
+        throw new LesserException('$number is less than 10');
+    else if($number > 10)
+        throw new GreaterException('$number is greater than 10');
+}
+
+try
+{
+    foo(9);
+}
+catch(LesserException $e)
+{
+    echo $e->getMessage();
+}
+```
+
+```go
+```
 
 &nbsp;
 
