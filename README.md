@@ -767,9 +767,30 @@ catch(GreaterException $e)
 }
 ```
 
-然後 Golang 中並沒有 `try .. catch`，這被許多人抨擊，但其實 Golang 中有自己處理錯誤的方式：`panic()`, `recover()`, `defer`
+Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為**（*Golang 推薦逐一處理錯誤的方式*），倘若你真想辦倒像是*捕捉異常*這樣的方式，你可以使用 Golang 中**另類處理錯誤的方式**：`panic()`, `recover()`, `defer`。
+
+你可以把 **`panic()` 當作是 `throw`（丟出錯誤）**，而這跟 PHP 的 `exit()` 有 87% 像，一但你執行了 `panic()` 你的程式就會宣告而終，但是別擔心，接下來你會用到 `defer`。
+
+關於 `defer` 上述已經有提到了，他是一個**反向執行的宣告**，會在**程式結束後被執行**，當你呼叫了 `panic()` 結束程式的時候，也就會開始執行 `defer`，所以我們要在 `defer` 內捕捉異常。
+
+而 **`recover()` 則是 `catch`（捕捉）**，我們要**在 `defer` 裡面用 `recover()` 解決 `panic()`**，如此一來**程式就會回歸正常而不會被結束**。
 
 ```go
+func foo(number int) (int) {
+    if number != 1 {
+        panic("number is not 1")
+    }
+    return number
+}
+
+func main() {
+    defer func() {
+        if err := recover(); err != nil {
+            fmt.Println(err)
+        }
+    }
+}
+
 ```
 
 &nbsp;
