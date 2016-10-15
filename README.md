@@ -4,6 +4,8 @@
 
 * [定義變數－Variables](#定義變數variables)
 
+* [輸出－Echo](#輸出echo)
+
 * [函式－Function](#函式function)
 
     * [多值回傳－Multiple Value](#多值回傳multiple-value)
@@ -130,6 +132,40 @@ c := "bar"
 
 // 覆蓋：先前已經定義過 a 了，所以可以像這樣直接覆蓋其值
 a = "fooooooo"
+```
+
+&nbsp;
+
+## 輸出－Echo
+
+在 PHP 中你會很常用到 `echo` 來顯示文字，像這樣。
+
+```php
+echo "Foo"; // 輸出：Foo
+
+$A = "Bar"
+echo $A; // 輸出：Bar
+
+$B = "Hello"
+echo $B . ", world!"; // 輸出：Hello, world!
+
+$C = [1, 2, 3];
+echo var_dump($C); // 輸出：array(3) {[0]=>int(1) [1]=>int(2) [2]=>int(3)}
+```
+
+然而在 Golang 中你會需要 `fmt` 套件，關於「什麼是套件」的說明你可以在文章下述了解。
+
+```go
+fmt.Println("Foo") // 輸出：Foo
+
+A := "Bar"
+fmt.Println(A) // 輸出：Bar
+
+B := "Hello"
+fmt.Printf("%s, world!", B) // 輸出：Hello, world!
+
+C := []int{1, 2, 3}
+fmt.Println(C) // 輸出：[1 2 3]
 ```
 
 &nbsp;
@@ -773,7 +809,7 @@ catch(Exception $e)
 }
 ```
 
-Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為**（*Golang 推薦逐一處理錯誤的方式*），倘若你真想辦倒像是*捕捉異常*這樣的方式，你可以使用 Golang 中**另類處理錯誤的方式**：`panic()`, `recover()`, `defer`。
+Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為**（*Golang 推薦逐一處理錯誤的方式*），倘若你真想辦倒像是*捕捉異常*這樣的方式，你確實可以使用 Golang 中**另類處理錯誤的方式**（可以的話**盡量避免使用這種方式**）：`panic()`, `recover()`, `defer`。
 
 你可以把 **`panic()` 當作是 `throw`（丟出錯誤）**，而這跟 PHP 的 `exit()` 有 87% 像，一但你執行了 `panic()` 你的程式就會宣告而終，但是別擔心，接下來你會用到 `defer`。
 
@@ -782,6 +818,19 @@ Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為
 而 **`recover()` 則是 `catch`（捕捉）**，我們要**在 `defer` 裡面用 `recover()` 解決 `panic()`**，如此一來**程式就會回歸正常而不會被結束**。
 
 ```go
+// 建立一個模仿 try&catch 的函式供稍後使用
+func try(fn func(), handler func(interface{})) {
+    // 這不會馬上被執行，但當 panic 被執行救會結束程式，結束程式就必定會呼叫 defer
+    defer func() { 
+        // 透過 recover 來從 panic 狀態中恢復，並呼叫捕捉函式
+        if err := recover(); err != nil {
+            handler(err)
+        }
+    }()
+    // 執行可能帶有 panic 的程式
+    fn()
+}
+
 func foo(number int) {
     if number < 10 {
         panic("number is less than 10")
@@ -793,14 +842,17 @@ func foo(number int) {
 
 func main() {
 
-    defer func() {
-        if err := recover(); err != nil {
-            fmt.Println(err)
-        }
-    }
+    try(func() {
+        foo(9)
+    }, func(e interface{}) {
+        fmt.Println(e) // 輸出：number is less than 10
+    })
     
-    foo(9)
-    foo(11)
+    try(func() {
+        foo(11)
+    }, func(e interface{}) {
+        fmt.Println(e) // 輸出：number is greater than 10
+    })
 }
 
 ```
