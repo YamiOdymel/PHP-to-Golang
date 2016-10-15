@@ -638,6 +638,46 @@ func main() {
 
 ## 錯誤處理－Error Exception
 
+### 錯誤回傳－Return Error
+
+有些時候你會回傳一個陣列，這個陣列裡面可能有資料**還有錯誤代號**，而你會用條件式判斷錯誤代號是否非空值，像這樣：
+
+```php
+function foo($number)
+{
+    if($number !== 1)
+        return ['number' => -1, 'error' => '$number is not 1'];
+    
+    return ['number' => $number, 'error' => null];
+}
+
+$bar = foo(0);
+
+if($bar['error'])
+    echo $bar['number'], $bar['error']; // 輸出：-1
+                                        //      $number is not 1
+```
+
+在 Golang 中**函式可以一次回傳多個值**，為此，你不需要真的回傳一個陣列，不過要注意的是你將會回傳一個屬於 `error` 資料型態的錯誤，所以你需要**引用 `errors` 套件**來幫助你做這件事。
+
+```go
+import "errors"
+
+func foo(number int) (int, error) {
+    if number != 1 {
+        return -1, errors.New("$number is not 1")
+    }
+    return number, nil
+}
+
+if bar, err := foo(0); err != nil {
+    fmt.Println(bar, err) // 輸出：-1
+                          //      $number is not 1
+}
+```
+
+### 拋出和捕捉異常－Try & Catch
+
 &nbsp;
 
 ## 套件／匯入／匯出－Package / Import / Export
