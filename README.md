@@ -6,6 +6,8 @@
 
 * [函式－Function](#函式function)
 
+    * [多值回傳－Multiple Value](#多值回傳multiple-value)
+
 * [匿名函式－Anonymous Function](匿名函式anonymous-function)
 
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
@@ -23,8 +25,6 @@
 * [跳往－Goto](#跳往goto)
 
 * [迴圈－Loops](#迴圈foreach)
-    
-    * [一般－For]()
     
     * [每個－Foreach]()
     
@@ -53,8 +53,6 @@
     * [匯出－Export](#匯出export)
 
 * [類別－Class](#類別class)
-
-   * [一般－Normal](#一般normal)
    
    * [建構子－Constructor](#建構子constructor)
    
@@ -145,7 +143,7 @@ function test()
 echo test(); // 輸出：Hello, world!
 ```
 
-忘了告訴你，只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
+只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
 
 ```go
 func test() string {
@@ -153,6 +151,34 @@ func test() string {
 }
 
 fmt.Println(test()) // 輸出：Hello, world!
+```
+
+### 多值回傳－Multiple Value
+
+在 PHP 中你要回傳多個資料你就會用上陣列，然後將資料放入陣列裡面，像這樣。
+
+```php
+function test()
+{
+    return ['username' => 'YamiOdymel', 
+            'time'     => 123456];
+}
+
+$data = test();
+
+echo $data['username'], $data['time']; // 輸出：YamiOdymel 123456
+```
+
+然而在 Golang 中你可以不必用到一個陣列，函式可以一次回傳多個值：
+
+```go
+func test() (string, int) {
+    return 'YamiOdymel', 123456
+}
+
+username, time := test()
+
+fmt.Println(username, time) // 輸出：YamiOdymel 123456
 ```
 
 &nbsp;
@@ -864,8 +890,6 @@ func main() {
 ## 類別－Class
 
 在 Golang 中沒有類別，給你一張衛生紙，你要學會不哭；正所謂「上有政策，下有對策」，Golang 中有所謂的「**建構體（Struct）**」和「**接口（Interface）**」，這就能夠滿足幾乎所有的需求了，這也是為什麼我認為 Golang 很簡潔卻又很強大的原因。
-
-### 一般－Normal
 
 讓我們先用 PHP 建立一個類別，然後看看 Golang 怎麼解決這個問題。
 
