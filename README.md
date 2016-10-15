@@ -22,6 +22,8 @@
 
 * [不定值－Mixed Type](#不定值mixed-type)
 
+* [逆向處理－Defer](#逆向處理defer)
+
 * [跳往－Goto](#跳往goto)
 
 * [迴圈－Loops](#迴圈loops)
@@ -377,6 +379,38 @@ fmt.Println(mixed) // 輸出：["A", "B", "C"]
 
 &nbsp;
 
+## 逆向處理－Defer
+
+當我們程式中不需要繼續使用到某個資源或是發生錯誤的時候，我們索性會將其關閉或是拋棄來節省資源開銷，例如 PHP 裡的讀取檔案：
+
+```php
+$handle = fopen('example.txt', 'r');
+
+if($errorA)
+    errorHandlerA();
+
+if($errorB)
+    errorHandlerB();
+
+fclose($handle); // 關閉檔案
+```
+
+在 Golang 中，你可以使用 `defer` 來在**程式結束的時候自動執行某些程式**(*其執行方向為反向*)。所以**你就不需要在程式最後面結束最前面的資源**，`defer` 可以被稱為「推遲執行」，實際上就是在程式結束後會「反序」執行的東西，例如你按照了這樣的順序定義 `defer`： `A->B->C->D`，那麼執行的順序其實會是 `D->C->B->A`，這用在程式結束時還蠻有用的，讓我們看看 Golang 如何改善上述範例。
+
+```go
+handle := file.Open("example.txt")
+defer file.Close() // 關閉檔案但「推遲執行」，所有程式結束後才會執行這裡
+
+if errorA {
+    errorHandlerA()
+}
+if errorB {
+    errorHandlerB()
+}
+```
+
+&nbsp;
+
 ## 跳往－Goto
 
 這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 呢，但是拜託，不要。
@@ -680,7 +714,7 @@ if($bar['error'])
                                         //      $number is not 1
 ```
 
-在 Golang 中**函式可以一次回傳多個值**，為此，你不需要真的回傳一個陣列，不過要注意的是你將會回傳一個屬於 `error` 資料型態的錯誤，所以你需要**引用 `errors` 套件**來幫助你做這件事。
+在 Golang 中**函式可以一次回傳多個值**，為此，你不需要真的回傳一個陣列，不過要注意的是你將會回傳一個屬於 `error` 資料型態的錯誤，所以你需要**引用 `errors` 套件**來幫助你做這件事，**事實上在 Golang 中有很多套件採用這樣的方式來讓你得知是否有錯誤發生**。
 
 ```go
 import "errors"
@@ -733,7 +767,7 @@ catch(GreaterException $e)
 }
 ```
 
-然後 Golang 中並沒有 `try .. catch`，這被許多人抨擊，而 Golang 作者則認為實際上
+然後 Golang 中並沒有 `try .. catch`，這被許多人抨擊，但其實 Golang 中有自己處理錯誤的方式：`panic()`, `recover()`, `defer`
 
 ```go
 ```
