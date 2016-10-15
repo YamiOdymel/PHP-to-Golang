@@ -54,15 +54,15 @@
 
 * [類別－Class](#類別class)
 
-   * [一般－Normal]()
+   * [一般－Normal](#一般normal)
    
-   * [建構子－Constructor]()
+   * [建構子－Constructor](#建構子constructor)
    
-   * [嵌入－Embedding]()
+   * [嵌入－Embedding](#嵌入embed)
    
-   * [遮蔽－Shadowing]()
+   * [遮蔽－Shadowing](#遮蔽shadowing)
    
-   * [多形－Polymorphism]()
+   * [多形－Polymorphism](#多形polymorphism)
 
 
 &nbsp;
