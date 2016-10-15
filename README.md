@@ -700,7 +700,7 @@ if bar, err := foo(0); err != nil {
 
 ### 拋出和捕捉異常－Try & Catch
 
-也許你在 PHP 中更常用的會是 `try .. catch`，在大型商業邏輯時經常看見如此地用法。
+也許你在 PHP 中更常用的會是 `try .. catch`，在大型商業邏輯時經常看見如此地用法，實際上這種用法令人感到聒噪（因為你會需要一堆 `try` 區塊：[Too many try/catch block for PDO](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo), [Too many try/catch blocks. Is this proper?](http://stackoverflow.com/questions/23295953/too-many-try-catch-blocks-is-this-proper), [Is this too many lines and too many nested blocks?](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo)）。
 
 ```php
 class LesserException  extends Exception { }
@@ -720,9 +720,20 @@ try
 }
 catch(LesserException $e)
 {
-    echo $e->getMessage();
+    echo $e->getMessage(); // 輸出：$number is less than 10
+}
+
+try
+{
+    foo(11);
+}
+catch(GreaterException $e)
+{
+    echo $e->getMessage(); // 輸出：$number is greater than 10
 }
 ```
+
+然後 Golang 中並沒有 `try .. catch`，這被許多人抨擊，而 Golang 作者則認為實際上
 
 ```go
 ```
