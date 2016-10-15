@@ -1012,7 +1012,7 @@ $handler->process($foo); // 輸出：處理 Foo | hello, world!
 $handler->process($bar); // 輸出：處理 Bar | hello, world!
 ```
 
-嗯⋯⋯那麼 Golang 呢？Golang 中有 `interface` 可以幫忙完成這個工作。
+嗯⋯⋯那麼 Golang 呢？實際上更簡單而且更有條理了，在 Golang 中有 `interface` 可以幫忙完成這個工作。
 
 ```go
 type Foo struct {
@@ -1023,16 +1023,17 @@ type Bar struct {
     msg string
 }
 
+// 透過 Handler 實作 process
 type Handler interface {
     process()
 }
 
-// 專門處理 Foo 資料的 process
+// 處理 Foo 資料的 process
 func (f Foo) process() {
     fmt.Printf("處理 Foo | %s, world!", f.msg)
 }
 
-// 專門處理 Bar 資料的 process
+// 處理 Bar 資料的 process
 func (b Bar) process() {
     fmt.Printf("處理 Bar | hello, %s", f.msg)
 }
