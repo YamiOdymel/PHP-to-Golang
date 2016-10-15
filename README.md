@@ -967,7 +967,7 @@ type Foo struct {
 
 type Bar struct {
     *Foo
-    msg string
+    msg string // 遮蔽了 Foo 的 msg
 }
 
 a := &Foo{msg: "Hello, world!"}
