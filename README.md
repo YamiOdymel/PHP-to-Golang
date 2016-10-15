@@ -30,7 +30,7 @@
     
     * [每個－Foreach](#每個foreach)
     
-    * [當 .. 重複－While](#當--重複while)
+    * [重複－While](#重複while)
     
     * [做 .. 重複－Do While](#做--重複do-while)
     
@@ -46,9 +46,9 @@
 
 * [錯誤處理－Error Exception](#錯誤處理error-exception)
 
-	* 
+	* [拋出和捕捉異常－Try & Catch](#拋出和捕捉異常try--catch)
 
-* [套件／匯入／匯出－Package / Import / Export]()
+* [套件／匯入／匯出－Package / Import / Export](#套件匯入匯出package--import--export)
 
     * [套件－Package](#套件package)
     
@@ -496,7 +496,7 @@ for _, value := range data {
 }
 ```
 
-### 當 .. 重複－While
+### 重複－While
 
 一個 `while(條件)` 迴圈在 PHP 裡面可以不斷地執行區塊中的程式，直到 `條件` 為 `false` 為止。
 
@@ -504,11 +504,16 @@ for _, value := range data {
 $i = 0;
 
 while( $i < 3 )
+{
     $i++;
     echo $i; // 輸出：123
+}
+
+while(true)
+    echo "WOW" // 輸出：WOWOWOWOWOWOWOWOW...
 ```
 
-在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**。
+在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**，而且一個**沒有條件的 `for` 迴圈會一直被執行**。
 
 ```go
 i := 0
@@ -516,6 +521,10 @@ i := 0
 for i < 3 {
     i++
     fmt.Println(i) // 輸出：123
+}
+
+for {
+    fmt.Println("WOW") // 輸出：WOWOWOWOWOWOWOWOW...
 }
 ```
 
@@ -737,22 +746,19 @@ if bar, err := foo(0); err != nil {
 也許你在 PHP 中更常用的會是 `try .. catch`，在大型商業邏輯時經常看見如此地用法，實際上這種用法令人感到聒噪（因為你會需要一堆 `try` 區塊：[Too many try/catch block for PDO](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo), [Too many try/catch blocks. Is this proper?](http://stackoverflow.com/questions/23295953/too-many-try-catch-blocks-is-this-proper), [Is this too many lines and too many nested blocks?](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo)）。
 
 ```php
-class LesserException  extends Exception { }
-class GreaterException extends Exception { }
-
 function foo($number)
 {
     if($number < 10)
-        throw new LesserException('$number is less than 10');
+        throw new Exception('$number is less than 10');
     else if($number > 10)
-        throw new GreaterException('$number is greater than 10');
+        throw new Exception('$number is greater than 10');
 }
 
 try
 {
     foo(9);
 }
-catch(LesserException $e)
+catch(Exception $e)
 {
     echo $e->getMessage(); // 輸出：$number is less than 10
 }
@@ -761,7 +767,7 @@ try
 {
     foo(11);
 }
-catch(GreaterException $e)
+catch(Exception $e)
 {
     echo $e->getMessage(); // 輸出：$number is greater than 10
 }
@@ -776,19 +782,25 @@ Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為
 而 **`recover()` 則是 `catch`（捕捉）**，我們要**在 `defer` 裡面用 `recover()` 解決 `panic()`**，如此一來**程式就會回歸正常而不會被結束**。
 
 ```go
-func foo(number int) (int) {
-    if number != 1 {
-        panic("number is not 1")
+func foo(number int) {
+    if number < 10 {
+        panic("number is less than 10")
     }
-    return number
+    if number > 10 {
+        panic("number is greater than 10")
+    }
 }
 
 func main() {
+
     defer func() {
         if err := recover(); err != nil {
             fmt.Println(err)
         }
     }
+    
+    foo(9)
+    foo(11)
 }
 
 ```
