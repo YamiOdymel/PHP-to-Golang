@@ -58,7 +58,9 @@
    
    * [建構子－Constructor]()
    
-   * [繼承－Embedding]()
+   * [嵌入－Embedding]()
+   
+   * [遮蔽－Shadowing]()
    
    * [多形－]()
 
@@ -906,7 +908,71 @@ func newTest() (test *Test) {
 }
 
 b := newTest()
-b.show()
+b.show() // 輸出：Hello, world!
 ```
 
 ### 嵌入－Embed
+
+讓我們假設你有兩個類別，你會把其中一個類別傳入到另一個類別裡面使用，廢話不多說！先上個 PHP 範例（*為了簡短篇幅我省去了換行*）。
+
+```php
+class Foo
+{
+    public $msg = "Hello, world!";
+}
+
+class Bar
+{
+    public $foo;
+    
+    function __construct($foo){ $this->foo = $foo;    }
+    function show()           { echo $this->foo->msg; }
+}
+
+$a = new Foo();
+$b = new Bar($a);
+$b->show(); // 輸出：Hello, world!
+```
+
+在 Golang 中你也有相同的用法，但是請記得：「**任何東西都是在「類別」外完成建構的**」。
+
+```go
+type Foo struct {
+    msg string
+}
+
+type Bar struct {
+    *Foo
+}
+
+func (b *Bar) show() {
+    // Foo 中的 msg 會直接暴露在 Bar 底下
+    // 所以你可以直接使用 b.msg
+    fmt.Println(b.msg)
+}
+
+a := &Foo{msg: "Hello, world!"}
+b := &Bar{a}
+b.show() // 輸出 Hello, world!
+```
+
+### 遮蔽－Shadowing
+
+在 PHP 中沒有相關的範例，這部分會以剛才「嵌入」章節中的 Golang 範例作為解說對象，你可以看見 Golang 在進行 `Foo` 嵌入 `Bar` 的時候，會自動將 `Foo` 的成員**暴露**在 `Bar` 底下，那麼*假設雙方之間有相同的成員名稱*呢？這個時候被嵌入的成員就會被「**遮蔽**」，下面是個實際範例，還有你如何解決遮蔽問題：
+
+```go
+type Foo struct {
+    msg string
+}
+
+type Bar struct {
+    *Foo
+    msg string
+}
+
+a := &Foo{msg: "Hello, world!"}
+b := &Bar{Foo: a, msg: "Moon, Dalan!"}
+
+fmt.Println(b.msg)     // 輸出：Moon, Dalan!
+fmt.Println(b.Foo.msg) // 輸出：Hello, world!
+```
