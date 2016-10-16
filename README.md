@@ -822,7 +822,7 @@ Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為
 ```go
 // 建立一個模仿 try&catch 的函式供稍後使用
 func try(fn func(), handler func(interface{})) {
-    // 這不會馬上被執行，但當 panic 被執行救會結束程式，結束程式就必定會呼叫 defer
+    // 這不會馬上被執行，但當 panic 被執行就會結束程式，結束程式就必定會呼叫 defer
     defer func() { 
         // 透過 recover 來從 panic 狀態中恢復，並呼叫捕捉函式
         if err := recover(); err != nil {
