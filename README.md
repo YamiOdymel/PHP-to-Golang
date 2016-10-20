@@ -374,7 +374,7 @@ $mixedData2 = ['username' => 'YamiOdymel',
 現在你有福了！正因為 Golang 中的 `interface{}` **可以接受任何內容**，所以你可以把它拿來**存放任何型態的資料**。
 
 ```go
-mixedData := []interface{"foobar", 123456}
+mixedData := []interface{}{"foobar", 123456}
 
 mixedData2 := make(map[string]interface{})
 mixedData2["username"] = "YamiOdymel"
