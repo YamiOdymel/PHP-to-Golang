@@ -3,71 +3,38 @@
 # 從 PHP 到 Golang 的筆記
 
 * [定義變數－Variables](#定義變數variables)
-
 * [輸出－Echo](#輸出echo)
-
 * [函式－Function](#函式function)
-
     * [多值回傳－Multiple Value](#多值回傳multiple-value)
-
 * [匿名函式－Anonymous Function](匿名函式anonymous-function)
-
 * [多資料儲存型態－Stores](#多資料儲存型態stores)
-
     * [陣列－Array](#陣列array)
-    
     * [切片－Slice](#切片slice)
-    
     * [映照－Map](#映照map)
-    
     * [接口－Interface](#接口interface)
-
 * [不定值－Mixed Type](#不定值mixed-type)
-
 * [逆向處理－Defer](#逆向處理defer)
-
 * [跳往－Goto](#跳往goto)
-
 * [迴圈－Loops](#迴圈loops)
-    
     * [每個－Foreach](#每個foreach)
-    
     * [重複－While](#重複while)
-    
     * [做 .. 重複－Do While](#做--重複do-while)
-    
 * [日期－Date](#日期date)
-
 * [切割字串－Split](#切割字串split)
-
 * [關聯陣列－Associative Array](#關聯陣列associative-array)
-
 * [是否存在－Isset](#是否存在isset)
-
 * [指針－Pointer](#指針pointer)
-
 * [錯誤處理－Error Exception](#錯誤處理error-exception)
-
 	* [拋出和捕捉異常－Try & Catch](#拋出和捕捉異常try--catch)
-
 * [套件／匯入／匯出－Package / Import / Export](#套件匯入匯出package--import--export)
-
     * [套件－Package](#套件package)
-    
     * [匯入－Import](#匯入import)
-    
     * [匯出－Export](#匯出export)
-
 * [類別－Class](#類別class)
-   
    * [建構子－Constructor](#建構子constructor)
-   
    * [嵌入－Embedding](#嵌入embed)
-   
    * [遮蔽－Shadowing](#遮蔽shadowing)
-   
    * [多形－Polymorphism](#多形polymorphism)
-
 
 &nbsp;
 
@@ -97,13 +64,10 @@ Golang 是我最終的選擇，主要在於我花了一天的時間來研究的�
 
 你可以先閱讀下列的手冊，他們都很不錯。
 
-[《Effective Go》中英双语版](https://bingohuang.gitbooks.io/effective-go-zh-en/content)
-
-[Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
-
-[Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
-
-[Golang concepts from an OOP point of view](https://github.com/luciotato/golang-notes/blob/master/OOP.md)
+* [《Effective Go》中英双语版](https://bingohuang.gitbooks.io/effective-go-zh-en/content)
+* [Go語言聖經（中文版）](https://wizardforcel.gitbooks.io/gopl-zh/content)
+* [Go Web 编程](https://astaxie.gitbooks.io/build-web-application-with-golang/content)
+* [Golang concepts from an OOP point of view](https://github.com/luciotato/golang-notes/blob/master/OOP.md)
 
 &nbsp;
 
