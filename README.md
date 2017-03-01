@@ -668,7 +668,7 @@ data := map[string]string{
            "username": "YamiOdymel", 
            "password": "2016 Spring"}
 
-fmt.Println(data["password"])
+fmt.Println(data["username"]) // 輸出：YamiOdymel
 ```
 
 &nbsp;
