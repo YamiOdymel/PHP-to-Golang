@@ -104,6 +104,8 @@ a = "fooooooo"
 
 ## 輸出－Echo
 
+###### PHP
+
 在 PHP 中你會很常用到 `echo` 來顯示文字，像這樣。
 
 ```php
@@ -138,6 +140,8 @@ fmt.Println(C) // 輸出：[1 2 3]
 
 ## 函式－Function
 
+###### PHP
+
 這很簡單，而且兩個語言的用法相差甚少，下面這是 PHP：
 
 ```php
@@ -160,6 +164,8 @@ fmt.Println(test()) // 輸出：Hello, world!
 ```
 
 ### 多值回傳－Multiple Value
+
+###### PHP
 
 在 PHP 中你要回傳多個資料你就會用上陣列，然後將資料放入陣列裡面，像這樣。
 
@@ -191,6 +197,8 @@ fmt.Println(username, time) // 輸出：YamiOdymel 123456
 
 ## 匿名函式－Anonymous Function
 
+###### PHP
+
 兩個語言的撰寫方式不盡相同，這是 PHP 的匿名函式：
 
 ```php
@@ -216,6 +224,8 @@ a() // 輸出：Hello, world!
 
 ## 多資料儲存型態－Stores
 
+###### PHP
+
 主要是 PHP 的陣列能做太多事情了，所以在 PHP 裡面要儲存什麼用陣列就好了。
 
 ```php
@@ -233,6 +243,8 @@ $array2 = ['username' => 'YamiOdymel',
 > 一個存放固定長度的陣列。
 
 先撇開 PHP 的「萬能陣列」不管，Golang 中的陣列既**單純卻又十分腦殘**，在定義一個陣列的時候，你必須給他一個**長度**還有**其內容存放的資料型態**，你的陣列內容**不一定要填滿其長度**，但是你的**陣列內容不能超過你當初定義的長度**。
+
+###### PHP
 
 如果你在 PHP 中這麼寫：
 
@@ -258,6 +270,8 @@ fmt.Println(a[0]) // 輸出：foo
 > 可供「裁切」而且供自由擴展的陣列。
 
 切片⋯⋯這聽起來也許很奇怪，但是你確實可以「切」他，讓我們先談談「切片」比起「陣列」要好在哪裡：「**你不用定義其最大長度**，而且你可以**直接賦予值**」，沒了。
+
+###### PHP
 
 所以你在 PHP 中這麼寫（*靠腰 啊不是跟剛才一樣*）：
 
@@ -286,6 +300,8 @@ fmt.Println(p[1:])  // 輸出：[2, 3, 4, 5, 6]
 fmt.Println(p[:1])  // 輸出：[1]
 ```
 
+###### PHP
+
 在 PHP 中倒是沒有那麼方便，在下列 PHP 範例中你需要不斷地使用 `array_slice()`。
 
 ```php
@@ -302,6 +318,8 @@ echo array_slice($p, 0, 1); // 輸出：[1]
 > 有鍵名和鍵值的陣列。
 
 你可以把「映照」看成是一個有鍵名和鍵值的陣列，但是記住：「**你需要事先定義其鍵名、鍵值的資料型態**」，這仍限制你**沒辦法**在映照中存放多種不同型態的資料。
+
+###### PHP
 
 讓我們先來個 PHP 範例：
 
@@ -329,6 +347,8 @@ fmt.Println(data["username"]) // 輸出：YamiOdymel
 
 也許你不喜歡「接口」這個詞，但用「介面」我怕會誤導大眾，所以，是的，接下來我會繼續稱其為「接口」。還記得你可以在 PHP 的關聯陣列裡面存放任何型態的資料嗎，像下面這樣？
 
+###### PHP
+
 ```php
 $mixedData  = ["foobar", 123456];
 $mixedData2 = ['username' => 'YamiOdymel', 
@@ -348,6 +368,8 @@ mixedData2["time"]     = 123456
 &nbsp;
 
 ## 不定值－Mixed Type
+
+###### PHP
 
 有時候你也許會有個不定值的變數，在 PHP 裏你可以直接將一個變數定義成字串、數值、空值、就像你那變心的女友一樣隨時都在變。
 
@@ -381,6 +403,8 @@ fmt.Println(mixed) // 輸出：["A", "B", "C"]
 
 ## 逆向處理－Defer
 
+###### PHP
+
 當我們程式中不需要繼續使用到某個資源或是發生錯誤的時候，我們索性會將其關閉或是拋棄來節省資源開銷，例如 PHP 裡的讀取檔案：
 
 ```php
@@ -413,6 +437,8 @@ if errorB {
 
 ## 跳往－Goto
 
+###### PHP
+
 這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 呢，但是拜託，不要。
 
 ```php
@@ -436,6 +462,8 @@ fmt.Println("bar") // 輸出：bar
 &nbsp;
 
 ## 迴圈－Loops
+
+###### PHP
 
 Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。普通 `for` 迴圈寫法在兩個語言中都十分相近，首先這是 PHP：
 
@@ -462,6 +490,8 @@ for ; j < 5 ; j++ {
 ```
 
 ### 每個－Foreach
+
+###### PHP
 
 在 PHP 裡，`foreach()` 能夠直接給你值和鍵名，用起來十分簡單：
 
@@ -498,6 +528,8 @@ for _, value := range data {
 
 ### 重複－While
 
+###### PHP
+
 一個 `while(條件)` 迴圈在 PHP 裡面可以不斷地執行區塊中的程式，直到 `條件` 為 `false` 為止。
 
 ```php
@@ -529,6 +561,8 @@ for {
 ```
 
 ### 做 .. 重複－Do While
+
+###### PHP
 
 PHP 中有 `do .. while()` 迴圈可以先做區塊中的動作。
 
@@ -577,6 +611,8 @@ LOOP:
 
 ## 日期－Date
 
+###### PHP
+
 在 PHP 中我們可以透過 `date()` 像這樣取得目前的日期：
 
 ```php
@@ -593,6 +629,8 @@ fmt.Println(time.Now().Format("Mon, Jan 2, 2006 at 3:04pm")) // 輸出： Mon, J
 &nbsp;
 
 ## 切割字串－Split
+
+###### PHP
 
 俗話說：「爆炸就是藝術」，可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），回歸正傳，如果你想在 PHP 裡面將字串切割成陣列，你可以這麼做：
 
@@ -613,6 +651,8 @@ array := strings.Split(data, ", ")
 &nbsp;
 
 ## 關聯陣列－Associative Array
+
+###### PHP
 
 這真的是很常用到的功能，就像物件一樣有著鍵名和鍵值，在 PHP 裡面你很簡單的就能靠*陣列（Array）*辦到。
 
@@ -636,6 +676,8 @@ fmt.Println(data["username"]) // 輸出：YamiOdymel
 &nbsp;
 
 ## 是否存在－Isset
+
+###### PHP
 
 你很常會在 PHP 裡面用 `isset()` 檢查一個索引是否存在，不是嗎？
 
@@ -663,6 +705,8 @@ if !exists {
 指針（有時也做參照）是一個像是「變數別名」的方法，這種方法讓你不用整天覆蓋舊的變數，讓我們假設 `A = 1; B = A;` 這個時候 `B` 會複製一份 `A` 且**兩者不相干**，倘若你希望修改 `B` 的時候實際上也會修改到 `A` 的值，就**會需要指針**。
 
 指針比起複製一個變數，他會建立一個指向到某個變數的記憶體位置，這也就是為什麼你改變指針，實際上是在改變某個變數。
+
+###### PHP
 
 在 PHP 的實際範例是這樣：
 
@@ -696,6 +740,8 @@ func main() {
 &nbsp;
 
 ## 錯誤處理－Error Exception
+
+###### PHP
 
 有些時候你會回傳一個陣列，這個陣列裡面可能有資料**還有錯誤代號**，而你會用條件式判斷錯誤代號是否非空值，像這樣：
 
@@ -738,6 +784,8 @@ if bar, err := foo(0); err != nil {
 ### 拋出和捕捉異常－Try & Catch
 
 也許你在 PHP 中更常用的會是 `try .. catch`，在大型商業邏輯時經常看見如此地用法，實際上這種用法令人感到聒噪（因為你會需要一堆 `try` 區塊：[Too many try/catch block for PDO](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo), [Too many try/catch blocks. Is this proper?](http://stackoverflow.com/questions/23295953/too-many-try-catch-blocks-is-this-proper), [Is this too many lines and too many nested blocks?](http://stackoverflow.com/questions/7620305/too-many-try-catch-block-for-pdo)）。
+
+###### PHP
 
 ```php
 function foo($number)
@@ -821,6 +869,8 @@ func main() {
 
 還記得在 PHP 裡要引用一堆檔案的日子嗎？到處可見的 `require()` 或是 `include()`？到了 Golang 這些都不見了，取而代之的是「套件（Package）」。現在讓我們來用 PHP 解釋一下。
 
+###### PHP
+
 ```php
 // a.php
 <?php
@@ -872,7 +922,11 @@ func main() {
 package main
 ```
 
-這意味著目前的檔案是屬於 `main` 套件（*你也可以依照你的喜好命名*），那麼要如何讓**同個套件之間的函式溝通**呢？先用你熟悉的 PHP 來做解釋：
+這意味著目前的檔案是屬於 `main` 套件（*你也可以依照你的喜好命名*），那麼要如何讓**同個套件之間的函式溝通**呢？
+
+###### PHP
+
+先用你熟悉的 PHP 來做解釋：
 
 ```php
 // a.php
@@ -998,6 +1052,8 @@ func main() {
 
 在 Golang 中沒有類別，給你一張衛生紙，你要學會不哭；正所謂「上有政策，下有對策」，Golang 中有所謂的「**建構體（Struct）**」和「**接口（Interface）**」，這就能夠滿足幾乎所有的需求了，這也是為什麼我認為 Golang 很簡潔卻又很強大的原因。
 
+###### PHP
+
 讓我們先用 PHP 建立一個類別，然後看看 Golang 怎麼解決這個問題。
 
 ```php
@@ -1034,6 +1090,8 @@ b.test() // 輸出：hello, world!
 ```
 
 ### 建構子－Constructor
+
+###### PHP
 
 在 PHP 中，當有一個類別被 `new` 的時候會自動執行該類別內的建構子（`__construct()`），通常你會用這個來初始化一些類別內部的值。
 
@@ -1082,7 +1140,11 @@ b.show() // 輸出：Hello, world!
 
 ### 嵌入－Embed
 
-讓我們假設你有兩個類別，你會把其中一個類別傳入到另一個類別裡面使用，廢話不多說！先上個 PHP 範例（*為了簡短篇幅我省去了換行*）。
+讓我們假設你有兩個類別，你會把其中一個類別傳入到另一個類別裡面使用。
+
+###### PHP
+
+廢話不多說！先上個 PHP 範例（*為了簡短篇幅我省去了換行*）。
 
 ```php
 class Foo
@@ -1129,6 +1191,8 @@ b.show() // 輸出 Hello, world!
 
 在 PHP 中沒有相關的範例，這部分會以剛才「嵌入」章節中的 Golang 範例作為解說對象，你可以看見 Golang 在進行 `Foo` 嵌入 `Bar` 的時候，會自動將 `Foo` 的成員**暴露**在 `Bar` 底下，那麼*假設雙方之間有相同的成員名稱*呢？這個時候被嵌入的成員就會被「**遮蔽**」，下面是個實際範例，還有你如何解決遮蔽問題：
 
+###### PHP
+
 ```go
 type Foo struct {
     msg string
@@ -1149,6 +1213,8 @@ fmt.Println(b.Foo.msg) // 輸出：Hello, world!
 ### 多形－Polymorphism
 
 雖然都是呼叫同一個函式，但是這個**函式可以針對不同的資料來源做出不同的舉動**，這就是**多形**。你也能夠把這看作是：「**訊息的意義由接收者定義，而不是傳送者**」，目前 PHP 中沒有真正的「多形」，不過你仍可以做出同樣的東西。
+
+###### PHP
 
 ```php
 class Foo{ public $msg = "hello";  }
