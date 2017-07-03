@@ -71,20 +71,18 @@ Golang 是我最終的選擇，主要在於我花了一天的時間來研究的�
 
 ## 定義變數－Variables
 
-###### PHP
-
 你能夠在 PHP 裡面想建立一個變數的時候就直接建立，夭壽讚，是嗎？
+
+###### PHP
 
 ```php
 $a = "foo";
 $b = "bar";
 ```
 
+蒸蚌！那麼 Golang 呢？在 Golang 中變數分為幾類：「新定義」、「預先定義」、「自動新定義」、「覆蓋」。讓我們來看看範例：
+
 ###### Golang
-
-蒸蚌！那麼 Golang 呢？在 Golang 中變數分為幾類：「新定義」、「預先定義」、「自動新定義」、「覆蓋」。
-
-讓我們來看看範例：
 
 ```go
 // 新定義：定義新的 a 變數為字串型別，而且值是「foo」
@@ -104,9 +102,9 @@ a = "fooooooo"
 
 ## 輸出－Echo
 
-###### PHP
-
 在 PHP 中你會很常用到 `echo` 來顯示文字，像這樣。
+
+###### PHP
 
 ```php
 echo "Foo"; // 輸出：Foo
@@ -122,6 +120,8 @@ echo var_dump($C); // 輸出：array(3) {[0]=>int(1) [1]=>int(2) [2]=>int(3)}
 ```
 
 然而在 Golang 中你會需要 `fmt` 套件，關於「什麼是套件」的說明你可以在文章下述了解。
+
+###### Golang
 
 ```go
 fmt.Println("Foo") // 輸出：Foo
@@ -140,9 +140,9 @@ fmt.Println(C) // 輸出：[1 2 3]
 
 ## 函式－Function
 
-###### PHP
-
 這很簡單，而且兩個語言的用法相差甚少，下面這是 PHP：
+
+###### PHP
 
 ```php
 function test()
@@ -155,6 +155,8 @@ echo test(); // 輸出：Hello, world!
 
 只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
 
+###### Golang
+
 ```go
 func test() string {
     return "Hello, world!"
@@ -165,9 +167,9 @@ fmt.Println(test()) // 輸出：Hello, world!
 
 ### 多值回傳－Multiple Value
 
-###### PHP
-
 在 PHP 中你要回傳多個資料你就會用上陣列，然後將資料放入陣列裡面，像這樣。
+
+###### PHP
 
 ```php
 function test()
@@ -183,6 +185,8 @@ echo $data['username'], $data['time']; // 輸出：YamiOdymel 123456
 
 然而在 Golang 中你可以不必用到一個陣列，函式可以一次回傳多個值：
 
+###### Golang
+
 ```go
 func test() (string, int) {
     return 'YamiOdymel', 123456
@@ -197,9 +201,9 @@ fmt.Println(username, time) // 輸出：YamiOdymel 123456
 
 ## 匿名函式－Anonymous Function
 
-###### PHP
+兩個語言的撰寫方式不盡相同。
 
-兩個語言的撰寫方式不盡相同，這是 PHP 的匿名函式：
+###### PHP
 
 ```php
 $a = function()
@@ -210,7 +214,7 @@ $a = function()
 $a(); // 輸出：Hello, world!
 ```
 
-然後這是 Golang：
+###### Golang
 
 ```go
 a := func() {
@@ -224,9 +228,9 @@ a() // 輸出：Hello, world!
 
 ## 多資料儲存型態－Stores
 
-###### PHP
-
 主要是 PHP 的陣列能做太多事情了，所以在 PHP 裡面要儲存什麼用陣列就好了。
+
+###### PHP
 
 ```php
 $array  = [1, 2, 3, 4, 5];
@@ -246,15 +250,13 @@ $array2 = ['username' => 'YamiOdymel',
 
 ###### PHP
 
-如果你在 PHP 中這麼寫：
-
 ```php
 $a = ["foo", "bar"];
 
 echo $a[0]; // 輸出：foo
 ```
 
-那麼這就是你在 Golang 如何將其實作：
+###### Golang
 
 ```go
 var a [2]string
@@ -273,15 +275,13 @@ fmt.Println(a[0]) // 輸出：foo
 
 ###### PHP
 
-所以你在 PHP 中這麼寫（*靠腰 啊不是跟剛才一樣*）：
-
 ```php
 $a = ["foo", "bar"];
 
 echo $a[0]; // 輸出：foo
 ```
 
-你會在 Golang 中這樣撰寫：
+###### Golang
 
 ```go
 a := []string{"foo", "bar"}
@@ -290,6 +290,8 @@ fmt.Println(a[0]) // 輸出：foo
 ```
 
 我們剛才有提到你可以「切」他，記得嗎？這有點像是 PHP 中的 `array_slice()`，但是 Golang 直接讓 Slice「*內建*」了這個用法，其用法是：`slice[開始:結束]`。
+
+###### Golang
 
 ```go
 p := []int{1, 2, 3, 4, 5, 6}
@@ -300,9 +302,9 @@ fmt.Println(p[1:])  // 輸出：[2, 3, 4, 5, 6]
 fmt.Println(p[:1])  // 輸出：[1]
 ```
 
-###### PHP
-
 在 PHP 中倒是沒有那麼方便，在下列 PHP 範例中你需要不斷地使用 `array_slice()`。
+
+###### PHP
 
 ```php
 $p = [1, 2, 3, 4, 5, 6];
@@ -321,8 +323,6 @@ echo array_slice($p, 0, 1); // 輸出：[1]
 
 ###### PHP
 
-讓我們先來個 PHP 範例：
-
 ```php
 $data["username"] = "YamiOdymel";
 $data["password"] = "2016 Spring";
@@ -331,6 +331,8 @@ echo $data["username"]; // 輸出：YamiOdymel
 ```
 
 在 Golang 裡可就沒這麼簡單了，你需要先用 `make()` 宣告 `map`。
+
+###### Golang
 
 ```go
 data := make(map[string]string)
@@ -357,6 +359,8 @@ $mixedData2 = ['username' => 'YamiOdymel',
 
 現在你有福了！正因為 Golang 中的 `interface{}` **可以接受任何內容**，所以你可以把它拿來**存放任何型態的資料**。
 
+###### Golang
+
 ```go
 mixedData := []interface{}{"foobar", 123456}
 
@@ -369,9 +373,9 @@ mixedData2["time"]     = 123456
 
 ## 不定值－Mixed Type
 
-###### PHP
-
 有時候你也許會有個不定值的變數，在 PHP 裏你可以直接將一個變數定義成字串、數值、空值、就像你那變心的女友一樣隨時都在變。
+
+###### PHP
 
 ```php
 $mixed = 123;
@@ -385,6 +389,8 @@ echo $mixed; // 輸出：["A", "B", "C"]
 ```
 
 在 Golang 中你必須給予變數一個指定的資料型別，不過還記得剛才提到的：「Golang 中有個 `interface{}` 能夠**存放任何事物**」嗎（*雖然也不是真的任何事物啦⋯⋯*）？
+
+###### Golang
 
 ```go
 var mixed interface{}
@@ -403,9 +409,9 @@ fmt.Println(mixed) // 輸出：["A", "B", "C"]
 
 ## 逆向處理－Defer
 
-###### PHP
-
 當我們程式中不需要繼續使用到某個資源或是發生錯誤的時候，我們索性會將其關閉或是拋棄來節省資源開銷，例如 PHP 裡的讀取檔案：
+
+###### PHP
 
 ```php
 $handle = fopen('example.txt', 'r');
@@ -420,6 +426,8 @@ fclose($handle); // 關閉檔案
 ```
 
 在 Golang 中，你可以使用 `defer` 來在**程式結束的時候自動執行某些程式**(*其執行方向為反向*)。所以**你就不需要在程式最後面結束最前面的資源**，`defer` 可以被稱為「推遲執行」，實際上就是在程式結束後會「反序」執行的東西，例如你按照了這樣的順序定義 `defer`： `A->B->C->D`，那麼執行的順序其實會是 `D->C->B->A`，這用在程式結束時還蠻有用的，讓我們看看 Golang 如何改善上述範例。
+
+###### Golang
 
 ```go
 handle := file.Open("example.txt")
@@ -437,9 +445,9 @@ if errorB {
 
 ## 跳往－Goto
 
-###### PHP
-
 這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 呢，但是拜託，不要。
+
+###### PHP
 
 ```php
 goto a;
@@ -449,7 +457,7 @@ a:
 echo 'bar'; // 輸出：bar
 ```
 
-在 Golang 也有相同的東西，令人感到神奇。
+###### Golang
 
 ```go
 goto a
@@ -463,9 +471,9 @@ fmt.Println("bar") // 輸出：bar
 
 ## 迴圈－Loops
 
-###### PHP
+Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。普通 `for` 迴圈寫法在兩個語言中都十分相近。
 
-Golang 中僅有 `for` 一種迴圈但卻能夠達成 `foreach`, `while`, `for` 多種用法。普通 `for` 迴圈寫法在兩個語言中都十分相近，首先這是 PHP：
+###### PHP
 
 ```php
 for($i = 0; $i < 3; $i++)
@@ -477,6 +485,8 @@ for($j; $j < 5; $j++)
 ```
 
 在 Golang 請記得：如果你的 `i` 先前並不存在，那麼**你就需要定義它**，所以下面這個範例你會看見 `i := 0`。
+
+###### Golang
 
 ```go
 for i := 0; i < 3; i++ {
@@ -491,9 +501,9 @@ for ; j < 5 ; j++ {
 
 ### 每個－Foreach
 
-###### PHP
+在 PHP 裡，`foreach()` 能夠直接給你值和鍵名，用起來十分簡單。
 
-在 PHP 裡，`foreach()` 能夠直接給你值和鍵名，用起來十分簡單：
+###### PHP
 
 ```php
 $data = ['a', 'b', 'c'];
@@ -508,7 +518,9 @@ foreach($data as $value)
     echo $value . '|' ; // 輸出：a|b|c|
 ```
 
-Golang 裡面雖然僅有 `for()` 但卻可以使用 `range` 達成和 PHP 一樣的 `foreach` 方式：
+Golang 裡面雖然僅有 `for()` 但卻可以使用 `range` 達成和 PHP 一樣的 `foreach` 方式。
+
+###### Golang
 
 ```go
 data := []string{"a", "b", "c"}
@@ -528,9 +540,9 @@ for _, value := range data {
 
 ### 重複－While
 
-###### PHP
-
 一個 `while(條件)` 迴圈在 PHP 裡面可以不斷地執行區塊中的程式，直到 `條件` 為 `false` 為止。
+
+###### PHP
 
 ```php
 $i = 0;
@@ -547,6 +559,8 @@ while(true)
 
 在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**，而且一個**沒有條件的 `for` 迴圈會一直被執行**。
 
+###### Golang
+
 ```go
 i := 0
 
@@ -562,9 +576,9 @@ for {
 
 ### 做 .. 重複－Do While
 
-###### PHP
-
 PHP 中有 `do .. while()` 迴圈可以先做區塊中的動作。
+
+###### PHP
 
 ```php
 $i = 0;
@@ -578,6 +592,8 @@ while($i < 3);
 ```
 
 在 Golang 中則沒有相關函式，但是你可以透過一個無止盡的 `for` 迴圈加上條件式來讓他結束迴圈。
+
+###### Golang
 
 ```go
 i := 0
@@ -595,6 +611,8 @@ for {
 
 要是你真的希望完全符合像是 PHP 那樣的設計方式，或者你可以在 Golang 中使用很邪惡的 `goto`。
 
+###### Golang
+
 ```go
 i := 0
 
@@ -611,15 +629,17 @@ LOOP:
 
 ## 日期－Date
 
-###### PHP
+在 PHP 中我們可以透過 `date()` 像這樣取得目前的日期。
 
-在 PHP 中我們可以透過 `date()` 像這樣取得目前的日期：
+###### PHP
 
 ```php
 echo date("Y-m-d H:i:s"); // 輸出：2016-07-13 12:59:59
 ```
 
-在 Golang 就稍微有趣點了，因為 Golang 中並不是以 `Y-m-d` 這種格式做為定義，而是 `1`、`2`、`3`，這令你需要去翻閱文件，才能夠知道 `1` 的定義是代表什麼。實際上用起來像這樣：
+在 Golang 就稍微有趣點了，因為 Golang 中並不是以 `Y-m-d` 這種格式做為定義，而是 `1`、`2`、`3`，這令你需要去翻閱文件，才能夠知道 `1` 的定義是代表什麼。
+
+###### Golang
 
 ```go
 fmt.Println(time.Now().Format("2006-2-1 03:04:00"))          // 輸出：2016-07-13 12:59:59
@@ -630,9 +650,9 @@ fmt.Println(time.Now().Format("Mon, Jan 2, 2006 at 3:04pm")) // 輸出： Mon, J
 
 ## 切割字串－Split
 
-###### PHP
+俗話說：「爆炸就是藝術」，可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），回歸正傳，如果你想在 PHP 裡面將字串切割成陣列，你可以這麼做。
 
-俗話說：「爆炸就是藝術」，可愛的 PHP 用詞真的很大膽，像是：`explode()`（爆炸）、`die()`（死掉），回歸正傳，如果你想在 PHP 裡面將字串切割成陣列，你可以這麼做：
+###### PHP
 
 ```php
 $data  = "a, b, c, d";
@@ -640,6 +660,8 @@ $array = explode(", ", $data);
 ```
 
 簡單的就讓一個字串給「爆炸」了，那麼 Golang 呢？
+
+###### Golang
 
 ```go
 data  := "a, b, c, d"
@@ -652,9 +674,9 @@ array := strings.Split(data, ", ")
 
 ## 關聯陣列－Associative Array
 
-###### PHP
-
 這真的是很常用到的功能，就像物件一樣有著鍵名和鍵值，在 PHP 裡面你很簡單的就能靠*陣列（Array）*辦到。
+
+###### PHP
 
 ```php
 $data = ['username' => 'YamiOdymel',
@@ -664,6 +686,8 @@ echo $data["username"]; // 輸出：YamiOdymel
 ```
 
 真是太棒了，那麼 Golang 呢？用 `map` 是差不多啦。如果有必要的話，你可以稍微複習一下先前提到的「多資料儲存型態－Stores」。
+
+###### Golang
 
 ```go
 data := map[string]string{
@@ -677,9 +701,9 @@ fmt.Println(data["username"]) // 輸出：YamiOdymel
 
 ## 是否存在－Isset
 
-###### PHP
-
 你很常會在 PHP 裡面用 `isset()` 檢查一個索引是否存在，不是嗎？
+
+###### PHP
 
 ```php
 // 如果 $data['username'] 存在
@@ -689,7 +713,9 @@ if(isset($data['username']))
 }
 ```
 
-在 Golang 裡面很簡單的能夠這樣辦到（僅適用於 `map`）：
+在 Golang 裡面很簡單的能夠這樣辦到（僅適用於 `map`）。
+
+###### Golang
 
 ```go
 username, exists := data["username"]
@@ -708,8 +734,6 @@ if !exists {
 
 ###### PHP
 
-在 PHP 的實際範例是這樣：
-
 ```php
 function zero(&$number) // & 即是指針
 {
@@ -722,7 +746,9 @@ zero($A);
 echo $A; // 輸出：0
 ```
 
-在 Golang 你需要用上 `*` 還有 `&` 符號：
+在 Golang 你需要用上 `*` 還有 `&` 符號。
+
+###### Golang
 
 ```go
 func zero(number *int) {
@@ -741,9 +767,9 @@ func main() {
 
 ## 錯誤處理－Error Exception
 
-###### PHP
+有些時候你會回傳一個陣列，這個陣列裡面可能有資料**還有錯誤代號**，而你會用條件式判斷錯誤代號是否非空值。
 
-有些時候你會回傳一個陣列，這個陣列裡面可能有資料**還有錯誤代號**，而你會用條件式判斷錯誤代號是否非空值，像這樣：
+###### PHP
 
 ```php
 function foo($number)
@@ -764,6 +790,8 @@ if($bar['error'])
 在 Golang 中**函式可以一次回傳多個值**，為此，你不需要真的回傳一個陣列，不過要注意的是你將會回傳一個屬於 `error` 資料型態的錯誤，所以你需要**引用 `errors` 套件**來幫助你做這件事。
 
 該注意的是 Golang 沒有 `try .. catch`，因為 **Golang 推薦這種錯誤處理方式**，你應該在**每一次執行可能會發生錯誤的程式時就處理錯誤**，而非**後來**用 `try` 到處包覆你的程式。
+
+###### Golang
 
 ```go
 import "errors"
@@ -822,6 +850,8 @@ Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為
 關於 `defer` 上述已經有提到了，他是一個**反向執行的宣告**，會在**程式結束後被執行**，當你呼叫了 `panic()` 結束程式的時候，也就會開始執行 `defer`，所以我們要在 `defer` 內**使用 `recover()` 讓程式不再繼續進行結束動作**，這就像是**捕捉異常**。
 
 **`recover()` 可以看作 `catch`（捕捉）**，我們要**在 `defer` 裡面用 `recover()` 解決 `panic()`**，如此一來**程式就會回歸正常而不會被結束**。
+
+###### Golang
 
 ```go
 // 建立一個模仿 try&catch 的函式供稍後使用
@@ -888,6 +918,8 @@ func main() {
 
 這看起來很正常對吧？但假設你有一堆檔案，這馬上就成了 `Include Hell`，讓我們看看 Golang 怎麼透過「套件」解決這個問題。
 
+###### Golang
+
 ```go
 // a.go
 package main
@@ -926,8 +958,6 @@ package main
 
 ###### PHP
 
-先用你熟悉的 PHP 來做解釋：
-
 ```php
 // a.php
 <?php
@@ -947,6 +977,8 @@ package main
 ```
 
 接著是 Golang；注意！你**不需要引用任何檔案**，因為下列兩個檔案**同屬一個套件**。
+
+###### Golang
 
 ```go
 // a.go
@@ -1052,9 +1084,9 @@ func main() {
 
 在 Golang 中沒有類別，給你一張衛生紙，你要學會不哭；正所謂「上有政策，下有對策」，Golang 中有所謂的「**建構體（Struct）**」和「**接口（Interface）**」，這就能夠滿足幾乎所有的需求了，這也是為什麼我認為 Golang 很簡潔卻又很強大的原因。
 
-###### PHP
-
 讓我們先用 PHP 建立一個類別，然後看看 Golang 怎麼解決這個問題。
+
+###### PHP
 
 ```php
 class Foobar
@@ -1072,6 +1104,8 @@ $b->test(); // 輸出：hello, world!
 ```
 
 雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**，在 Golang 中還有一點，那就是他們**沒有** `public`, `private`, `protected` 的種類。
+
+###### Golang
 
 ```go
 // 先定義一個 Foobar 建構體，然後有個叫做 a 的字串成員
@@ -1091,9 +1125,9 @@ b.test() // 輸出：hello, world!
 
 ### 建構子－Constructor
 
-###### PHP
-
 在 PHP 中，當有一個類別被 `new` 的時候會自動執行該類別內的建構子（`__construct()`），通常你會用這個來初始化一些類別內部的值。
+
+###### PHP
 
 ```php
 class Test
@@ -1116,6 +1150,8 @@ $b->show(); // 輸出：foobar
 ```
 
 但是在 Golang 裡**因為沒有類別，也就沒有建構子**，不巧的是**建構體本身也不帶有建構子的特性**，這個時候你**只能自己在外部建立一個建構用函式**。
+
+###### Golang
 
 ```go
 type Test struct {
@@ -1140,11 +1176,9 @@ b.show() // 輸出：Hello, world!
 
 ### 嵌入－Embed
 
-讓我們假設你有兩個類別，你會把其中一個類別傳入到另一個類別裡面使用。
+讓我們假設你有兩個類別，你會把其中一個類別傳入到另一個類別裡面使用，廢話不多說！先上個 PHP 範例（*為了簡短篇幅我省去了換行*）。
 
 ###### PHP
-
-廢話不多說！先上個 PHP 範例（*為了簡短篇幅我省去了換行*）。
 
 ```php
 class Foo
@@ -1166,6 +1200,8 @@ $b->show(); // 輸出：Hello, world!
 ```
 
 在 Golang 中你也有相同的用法，但是請記得：「**任何東西都是在「類別」外完成建構的**」。
+
+###### Golang
 
 ```go
 type Foo struct {
@@ -1190,8 +1226,6 @@ b.show() // 輸出 Hello, world!
 ### 遮蔽－Shadowing
 
 在 PHP 中沒有相關的範例，這部分會以剛才「嵌入」章節中的 Golang 範例作為解說對象，你可以看見 Golang 在進行 `Foo` 嵌入 `Bar` 的時候，會自動將 `Foo` 的成員**暴露**在 `Bar` 底下，那麼*假設雙方之間有相同的成員名稱*呢？這個時候被嵌入的成員就會被「**遮蔽**」，下面是個實際範例，還有你如何解決遮蔽問題：
-
-###### PHP
 
 ```go
 type Foo struct {
@@ -1248,6 +1282,8 @@ $handler->process($bar); // 輸出：處理 Bar | hello, world!
 ```
 
 嗯⋯⋯那麼 Golang 呢？實際上更簡單而且更有條理了，在 Golang 中有 `interface` 可以幫忙完成這個工作。
+
+###### Golang
 
 ```go
 type Foo struct {
