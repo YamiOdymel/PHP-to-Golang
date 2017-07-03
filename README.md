@@ -119,9 +119,9 @@ $C = [1, 2, 3];
 echo var_dump($C); // 輸出：array(3) {[0]=>int(1) [1]=>int(2) [2]=>int(3)}
 ```
 
-然而在 Golang 中你會需要 `fmt` 套件，關於「什麼是套件」的說明你可以在文章下述了解。
-
 ###### Golang
+
+然而在 Golang 中你會需要 `fmt` 套件，關於「什麼是套件」的說明你可以在文章下述了解。
 
 ```go
 fmt.Println("Foo") // 輸出：Foo
@@ -153,9 +153,9 @@ function test()
 echo test(); // 輸出：Hello, world!
 ```
 
-只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
-
 ###### Golang
+
+只是 Golang 稍微聒噪了一點，你必須**在函式後面宣告他最後會回傳什麼資料型別**。
 
 ```go
 func test() string {
@@ -183,9 +183,9 @@ $data = test();
 echo $data['username'], $data['time']; // 輸出：YamiOdymel 123456
 ```
 
-然而在 Golang 中你可以不必用到一個陣列，函式可以一次回傳多個值：
-
 ###### Golang
+
+然而在 Golang 中你可以不必用到一個陣列，函式可以一次回傳多個值：
 
 ```go
 func test() (string, int) {
@@ -330,9 +330,9 @@ $data["password"] = "2016 Spring";
 echo $data["username"]; // 輸出：YamiOdymel
 ```
 
-在 Golang 裡可就沒這麼簡單了，你需要先用 `make()` 宣告 `map`。
-
 ###### Golang
+
+在 Golang 裡可就沒這麼簡單了，你需要先用 `make()` 宣告 `map`。
 
 ```go
 data := make(map[string]string)
@@ -357,9 +357,9 @@ $mixedData2 = ['username' => 'YamiOdymel',
                'time'     => 123456];
 ```
 
-現在你有福了！正因為 Golang 中的 `interface{}` **可以接受任何內容**，所以你可以把它拿來**存放任何型態的資料**。
-
 ###### Golang
+
+現在你有福了！正因為 Golang 中的 `interface{}` **可以接受任何內容**，所以你可以把它拿來**存放任何型態的資料**。
 
 ```go
 mixedData := []interface{}{"foobar", 123456}
@@ -388,9 +388,9 @@ $mixed = ["A", "B", "C"];
 echo $mixed; // 輸出：["A", "B", "C"]
 ```
 
-在 Golang 中你必須給予變數一個指定的資料型別，不過還記得剛才提到的：「Golang 中有個 `interface{}` 能夠**存放任何事物**」嗎（*雖然也不是真的任何事物啦⋯⋯*）？
-
 ###### Golang
+
+在 Golang 中你必須給予變數一個指定的資料型別，不過還記得剛才提到的：「Golang 中有個 `interface{}` 能夠**存放任何事物**」嗎（*雖然也不是真的任何事物啦⋯⋯*）？
 
 ```go
 var mixed interface{}
@@ -425,9 +425,9 @@ if($errorB)
 fclose($handle); // 關閉檔案
 ```
 
-在 Golang 中，你可以使用 `defer` 來在**程式結束的時候自動執行某些程式**(*其執行方向為反向*)。所以**你就不需要在程式最後面結束最前面的資源**，`defer` 可以被稱為「推遲執行」，實際上就是在程式結束後會「反序」執行的東西，例如你按照了這樣的順序定義 `defer`： `A->B->C->D`，那麼執行的順序其實會是 `D->C->B->A`，這用在程式結束時還蠻有用的，讓我們看看 Golang 如何改善上述範例。
-
 ###### Golang
+
+在 Golang 中，你可以使用 `defer` 來在**程式結束的時候自動執行某些程式**(*其執行方向為反向*)。所以**你就不需要在程式最後面結束最前面的資源**，`defer` 可以被稱為「推遲執行」，實際上就是在程式結束後會「反序」執行的東西，例如你按照了這樣的順序定義 `defer`： `A->B->C->D`，那麼執行的順序其實會是 `D->C->B->A`，這用在程式結束時還蠻有用的，讓我們看看 Golang 如何改善上述範例。
 
 ```go
 handle := file.Open("example.txt")
@@ -484,9 +484,9 @@ for($j; $j < 5; $j++)
     echo $j; // 輸出：01234
 ```
 
-在 Golang 請記得：如果你的 `i` 先前並不存在，那麼**你就需要定義它**，所以下面這個範例你會看見 `i := 0`。
-
 ###### Golang
+
+在 Golang 請記得：如果你的 `i` 先前並不存在，那麼**你就需要定義它**，所以下面這個範例你會看見 `i := 0`。
 
 ```go
 for i := 0; i < 3; i++ {
@@ -518,9 +518,9 @@ foreach($data as $value)
     echo $value . '|' ; // 輸出：a|b|c|
 ```
 
-Golang 裡面雖然僅有 `for()` 但卻可以使用 `range` 達成和 PHP 一樣的 `foreach` 方式。
-
 ###### Golang
+
+Golang 裡面雖然僅有 `for()` 但卻可以使用 `range` 達成和 PHP 一樣的 `foreach` 方式。
 
 ```go
 data := []string{"a", "b", "c"}
@@ -557,9 +557,9 @@ while(true)
     echo "WOW" // 輸出：WOWOWOWOWOWOWOWOW...
 ```
 
-在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**，而且一個**沒有條件的 `for` 迴圈會一直被執行**。
-
 ###### Golang
+
+在 Golang 裡也有相同的做法，但仍是透過 `for` 迴圈，請注意**這個 `for` 迴圈並沒有任何的分號（`;`）**，而且一個**沒有條件的 `for` 迴圈會一直被執行**。
 
 ```go
 i := 0
@@ -591,9 +591,9 @@ do
 while($i < 3);
 ```
 
-在 Golang 中則沒有相關函式，但是你可以透過一個無止盡的 `for` 迴圈加上條件式來讓他結束迴圈。
-
 ###### Golang
+
+在 Golang 中則沒有相關函式，但是你可以透過一個無止盡的 `for` 迴圈加上條件式來讓他結束迴圈。
 
 ```go
 i := 0
@@ -609,9 +609,9 @@ for {
 }
 ```
 
-要是你真的希望完全符合像是 PHP 那樣的設計方式，或者你可以在 Golang 中使用很邪惡的 `goto`。
-
 ###### Golang
+
+要是你真的希望完全符合像是 PHP 那樣的設計方式，或者你可以在 Golang 中使用很邪惡的 `goto`。
 
 ```go
 i := 0
@@ -637,9 +637,9 @@ LOOP:
 echo date("Y-m-d H:i:s"); // 輸出：2016-07-13 12:59:59
 ```
 
-在 Golang 就稍微有趣點了，因為 Golang 中並不是以 `Y-m-d` 這種格式做為定義，而是 `1`、`2`、`3`，這令你需要去翻閱文件，才能夠知道 `1` 的定義是代表什麼。
-
 ###### Golang
+
+在 Golang 就稍微有趣點了，因為 Golang 中並不是以 `Y-m-d` 這種格式做為定義，而是 `1`、`2`、`3`，這令你需要去翻閱文件，才能夠知道 `1` 的定義是代表什麼。
 
 ```go
 fmt.Println(time.Now().Format("2006-2-1 03:04:00"))          // 輸出：2016-07-13 12:59:59
@@ -659,9 +659,9 @@ $data  = "a, b, c, d";
 $array = explode(", ", $data);
 ```
 
-簡單的就讓一個字串給「爆炸」了，那麼 Golang 呢？
-
 ###### Golang
+
+簡單的就讓一個字串給「爆炸」了，那麼 Golang 呢？
 
 ```go
 data  := "a, b, c, d"
@@ -685,9 +685,9 @@ $data = ['username' => 'YamiOdymel',
 echo $data["username"]; // 輸出：YamiOdymel
 ```
 
-真是太棒了，那麼 Golang 呢？用 `map` 是差不多啦。如果有必要的話，你可以稍微複習一下先前提到的「多資料儲存型態－Stores」。
-
 ###### Golang
+
+真是太棒了，那麼 Golang 呢？用 `map` 是差不多啦。如果有必要的話，你可以稍微複習一下先前提到的「多資料儲存型態－Stores」。
 
 ```go
 data := map[string]string{
@@ -713,9 +713,9 @@ if(isset($data['username']))
 }
 ```
 
-在 Golang 裡面很簡單的能夠這樣辦到（僅適用於 `map`）。
-
 ###### Golang
+
+在 Golang 裡面很簡單的能夠這樣辦到（僅適用於 `map`）。
 
 ```go
 username, exists := data["username"]
@@ -746,9 +746,9 @@ zero($A);
 echo $A; // 輸出：0
 ```
 
-在 Golang 你需要用上 `*` 還有 `&` 符號。
-
 ###### Golang
+
+在 Golang 你需要用上 `*` 還有 `&` 符號。
 
 ```go
 func zero(number *int) {
@@ -787,11 +787,11 @@ if($bar['error'])
                                         //      $number is not 1
 ```
 
+###### Golang
+
 在 Golang 中**函式可以一次回傳多個值**，為此，你不需要真的回傳一個陣列，不過要注意的是你將會回傳一個屬於 `error` 資料型態的錯誤，所以你需要**引用 `errors` 套件**來幫助你做這件事。
 
 該注意的是 Golang 沒有 `try .. catch`，因為 **Golang 推薦這種錯誤處理方式**，你應該在**每一次執行可能會發生錯誤的程式時就處理錯誤**，而非**後來**用 `try` 到處包覆你的程式。
-
-###### Golang
 
 ```go
 import "errors"
@@ -843,15 +843,15 @@ catch(Exception $e)
 }
 ```
 
-Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為**（*Golang 推薦逐一處理錯誤的方式*），倘若你真想辦倒像是*捕捉異常*這樣的方式，你確實可以使用 Golang 中**另類處理錯誤的方式**（可以的話**盡量避免使用這種方式**）：`panic()`, `recover()`, `defer`。
+###### Golang
+
+Golang 中並沒有 `try .. catch`，實際上 Golang 也**不鼓勵這種行為**（*Golang 推薦逐一處理錯誤的方式*），倘若你真想辦倒像是*捕捉異常*這樣的方式，你確實可以使用 Golang 中**另類處理錯誤的方式**（可以的話盡量避免使用這種方式）：`panic()`, `recover()`, `defer`。
 
 你可以把 **`panic()` 當作是 `throw`（丟出錯誤）**，而這跟 PHP 的 `exit()` 有 87% 像，一但你執行了 `panic()` 你的程式就會宣告而終，但是別擔心，因為程式結束的時候會呼叫 `defer`，所以我們**接下來要在 `defer` 停止 `panic()`**。
 
 關於 `defer` 上述已經有提到了，他是一個**反向執行的宣告**，會在**程式結束後被執行**，當你呼叫了 `panic()` 結束程式的時候，也就會開始執行 `defer`，所以我們要在 `defer` 內**使用 `recover()` 讓程式不再繼續進行結束動作**，這就像是**捕捉異常**。
 
 **`recover()` 可以看作 `catch`（捕捉）**，我們要**在 `defer` 裡面用 `recover()` 解決 `panic()`**，如此一來**程式就會回歸正常而不會被結束**。
-
-###### Golang
 
 ```go
 // 建立一個模仿 try&catch 的函式供稍後使用
@@ -938,9 +938,7 @@ func main() {
 }
 ```
 
-「*蛤？？？殺小？？？*」你可能如此地說道。
-
-是的，`main.go` 中除了引用 `fmt` 套件（*為了要輸出結果用的套件*）之外**完全沒有引用到 `a.go`**。
+「*蛤？？？殺小？？？*」你可能如此地說道。是的，`main.go` 中除了引用 `fmt` 套件（*為了要輸出結果用的套件*）之外**完全沒有引用到 `a.go`**。
 
 「*蛤？？？殺小？？？？？？*」你彷彿回到了幾秒鐘前的自己。
 
@@ -976,9 +974,9 @@ package main
 ?>
 ```
 
-接著是 Golang；注意！你**不需要引用任何檔案**，因為下列兩個檔案**同屬一個套件**。
-
 ###### Golang
+
+接著是 Golang；注意！你**不需要引用任何檔案**，因為下列兩個檔案**同屬一個套件**。
 
 ```go
 // a.go
@@ -1103,9 +1101,9 @@ $b = new Foobar();
 $b->test(); // 輸出：hello, world!
 ```
 
-雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**，在 Golang 中還有一點，那就是他們**沒有** `public`, `private`, `protected` 的種類。
-
 ###### Golang
+
+雖然 Golang 沒有類別，但是「**建構體（Struct）**」就十分地堪用了，首先你要知道在 Golang 中「類別」的成員還有方法都是在「類別」**外面**所定義的，**跟 PHP 在類別內定義的方式有所不同**，在 Golang 中還有一點，那就是他們**沒有** `public`, `private`, `protected` 的種類。
 
 ```go
 // 先定義一個 Foobar 建構體，然後有個叫做 a 的字串成員
@@ -1149,9 +1147,9 @@ $b = new Test();
 $b->show(); // 輸出：foobar
 ```
 
-但是在 Golang 裡**因為沒有類別，也就沒有建構子**，不巧的是**建構體本身也不帶有建構子的特性**，這個時候你**只能自己在外部建立一個建構用函式**。
-
 ###### Golang
+
+但是在 Golang 裡**因為沒有類別，也就沒有建構子**，不巧的是**建構體本身也不帶有建構子的特性**，這個時候你**只能自己在外部建立一個建構用函式**。
 
 ```go
 type Test struct {
@@ -1199,9 +1197,9 @@ $b = new Bar($a);
 $b->show(); // 輸出：Hello, world!
 ```
 
-在 Golang 中你也有相同的用法，但是請記得：「**任何東西都是在「類別」外完成建構的**」。
-
 ###### Golang
+
+在 Golang 中你也有相同的用法，但是請記得：「**任何東西都是在「類別」外完成建構的**」。
 
 ```go
 type Foo struct {
@@ -1281,9 +1279,9 @@ $handler->process($foo); // 輸出：處理 Foo | hello, world!
 $handler->process($bar); // 輸出：處理 Bar | hello, world!
 ```
 
-嗯⋯⋯那麼 Golang 呢？實際上更簡單而且更有條理了，在 Golang 中有 `interface` 可以幫忙完成這個工作。
-
 ###### Golang
+
+嗯⋯⋯那麼 Golang 呢？實際上更簡單而且更有條理了，在 Golang 中有 `interface` 可以幫忙完成這個工作。
 
 ```go
 type Foo struct {
