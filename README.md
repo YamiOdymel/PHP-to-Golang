@@ -1,5 +1,4 @@
 ![](images/logo.png)
-
 # 我為什麼從 PHP 轉到 Golang？
 
 PHP 和模塊之間的關係令人感到煩躁，假設你要讀取 `yaml` 檔案，你需要有一個 `yaml` 的模塊，為此，你還需要將其編譯然後將編譯後的模塊擺放至指定位置，之後換了一台伺服器你還要重新編譯，這點到現在還是沒有改善；順帶一提之後出了 PHP 7 效能確實提升了許多（比 Python 3 快了些），但 PHP 仍令我感到臃腫，我覺得是時候 <br>（轉行）了。
@@ -9,6 +8,8 @@ PHP 和 Golang 的效能我想毋庸置疑是後者比較快（而且是以倍�
 ## Node.js
 
 Node.js 的效能可以說是快上 PHP [3.5倍至6倍左右](http://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=php&lang2=node)，而且撰寫的語言還是 JavaScript，蒸蚌，如此一來就不需要學習新語言了！搭配 Babel 更可以說是萬能，不過那跟「跳跳虎」一樣的 Async 邏輯還有那恐怖的 Callback Hell，有人認為前者是種優點，這點我不否認，但是對學習 PHP 的我來說太過於 "Mind Fuck"，至於後者的 Callback Hell 雖然有 Promise，但是那又是另一個「Then Hell」的故事了。相較於 Golang 之下，Node.js 似乎就沒有那麼吸引我了。你確實可以用 Node.js 寫出很多東西，不過那 V8 引擎的效能仍然有限，而且要學習新的事物，不就應該是「全新」的嗎 ;)？
+
+題外話：[為什麼 Node.js 不適合大型和商業專案？](https://yami.io/you-might-not-need-nodejs/)
 
 ## Rust
 
@@ -437,7 +438,7 @@ if errorB {
 
 # 跳往－Goto
 
-這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 呢，但是拜託，不要。
+這東西很邪惡，不是嗎？又不是在寫 BASIC，不過也許有時候你會在 PHP 用上呢。但是拜託，不要。
 
 #### PHP
 
@@ -545,7 +546,7 @@ while( $i < 3 ) {
 }
 
 while(true)
-    echo "WOW" // 輸出：WOWOWOWOWOWOWOWOW...
+    echo "WOW" // 輸出：WOWWOWWOWWOWWOW...
 ```
 
 #### Golang
@@ -561,7 +562,7 @@ for i < 3 {
 }
 
 for {
-    fmt.Println("WOW") // 輸出：WOWOWOWOWOWOWOWOW...
+    fmt.Println("WOW") // 輸出：WOWWOWWOWWOWWOW...
 }
 ```
 
@@ -574,12 +575,10 @@ PHP 中有 `do .. while()` 迴圈可以先做區塊中的動作。
 ```php
 $i = 0;
 
-do
-{
+do {
     $i++;
     echo $i; // 輸出：123
-}
-while($i < 3);
+} while($i < 3);
 ```
 
 #### Golang
@@ -947,8 +946,7 @@ package main
 ```php
 // a.php
 <?php
-    function foo()
-    {
+    function foo() {
         // ...
     }
 ?>
